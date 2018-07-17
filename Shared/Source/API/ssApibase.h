@@ -60,12 +60,17 @@ namespace API
 		QByteArray authToken() const;
 		QByteArray authTokenHeader() const;
 
-		virtual QNetworkReply *handleRequest(QString path, QStringList sort, APagination *pagination,
-			QVariantMap filters = QVariantMap(),
-			QStringList fields = QStringList(), QStringList expand = QStringList(),
-			QString id = 0)
+		virtual QNetworkReply *handleRequest(const QString &path, 
+			const QVariantMap	&parameters = QVariantMap(),
+			const QStringList	&sort		= QStringList(),
+			const APagination	*pagination = nullptr,
+			const QVariantMap	&filters	= QVariantMap(),
+			const QStringList	&fields		= QStringList(), 
+			const QStringList	&expand		= QStringList(),
+			const QString		&id			= QString())
 		{
 				Q_UNUSED(path)
+				Q_UNUSED(parameters)
 				Q_UNUSED(sort)
 				Q_UNUSED(filters)
 				Q_UNUSED(fields)

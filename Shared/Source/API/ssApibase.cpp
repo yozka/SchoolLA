@@ -440,8 +440,7 @@ void APIBase::setAuthTokenHeader(QByteArray authTokenHeader)
 QNetworkReply *APIBase :: get(QUrl url)
 {
     QNetworkRequest request = createRequest(url);
-    setRawHeaders(&request);
-
+	setRawHeaders(&request);
     QNetworkReply *reply = manager->get(request);
     connectReplyToErrors(reply);
     return reply;

@@ -1,7 +1,7 @@
 import QtQuick 2.6
 import QtQuick.Controls 2.0
 
-import com.sla.api 1.0
+import com.sla.serviceapi 1.0
 
 ApplicationWindow 
 {
@@ -14,7 +14,7 @@ ApplicationWindow
 	{
 		id: serviceAPI
 
-        baseUrl: "https://sla.tigraha.com/api/1.0"
+        baseUrl: "https://sla.tigraha.com/api"
 
         authTokenHeader: "Authorization"
         authToken: "Bearer 8aef452ee3b32466209535b96d456b06"

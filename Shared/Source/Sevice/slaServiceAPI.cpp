@@ -20,7 +20,7 @@ AServiceAPI :: AServiceAPI()
 	: 
 		API::APIBase(0)
 {
-
+	//setAccept("application/json; charset=utf-8");
 }
 ///----------------------------------------------------------------------------
 
@@ -35,20 +35,51 @@ AServiceAPI :: AServiceAPI()
 /// 
 ///
 ///----------------------------------------------------------------------------
-QNetworkReply *AServiceAPI :: handleRequest(QString path, QStringList sort, QVariantMap filters,	QStringList fields, QStringList expand,	QString id)
+QNetworkReply *AServiceAPI :: handleRequest(
+		const QString			&path,
+		const QVariantMap		&parameters,
+		const QStringList		&sort,
+		const API::APagination	*pagination,
+		const QVariantMap		&filters,
+		const QStringList		&fields,
+		const QStringList		&expand,
+		const QString			&id)
 {
-	/*
-	if (path == "/v1/coupon") {
-		return getCoupons(sort, pagination, filters, fields);
+	if (path == "grade")
+	{
+		return getGrade(1);
 	}
-	else if (path == "/v1/coupon/{id}") {
-		return getCouponDetail(id);
-	}
-	else if (path == "/v1/categories") {
-		return getCategories(sort, pagination);
-	}
-	*/
+
+
 	return nullptr;
+}
+///----------------------------------------------------------------------------
+
+
+
+
+
+
+ ///---------------------------------------------------------------------------
+///
+/// получить список занятий
+/// 
+///
+///----------------------------------------------------------------------------
+QNetworkReply *AServiceAPI :: getGrade(const int schoolID)
+{
+	QUrl url = QUrl(baseUrl() + "/1.0/grade/");
+	QUrlQuery query;
+	query.addQueryItem("schoolID", QString::number(schoolID));
+
+
+
+	url.setQuery(query.query());
+
+
+	QNetworkReply *reply = get(url);
+
+	return reply;
 }
 
 

@@ -16,9 +16,6 @@
     <Filter Include="source\Service">
       <UniqueIdentifier>{e7781029-7f7a-4558-9cc7-5f36bbf5a647}</UniqueIdentifier>
     </Filter>
-    <Filter Include="source\Service\API">
-      <UniqueIdentifier>{300985c8-6c35-40ac-bc0f-037b71da2056}</UniqueIdentifier>
-    </Filter>
     <Filter Include="source\API\Models">
       <UniqueIdentifier>{845298b1-9d68-430a-b932-96bbf9e583cb}</UniqueIdentifier>
     </Filter>
@@ -36,6 +33,12 @@
     </Filter>
     <Filter Include="source\API\Models\Pagination">
       <UniqueIdentifier>{8d46eb73-64ea-429c-b1dd-6900c85a3072}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\API\Models\Item">
+      <UniqueIdentifier>{11ea0532-9496-4f52-8b6a-f7781c220d47}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\API\Models\DetailsModel">
+      <UniqueIdentifier>{049f5a8f-ecae-43f4-bdd3-c425a90de55a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -56,9 +59,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Source\API\ssApibase.cpp">
       <Filter>source\API</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Source\Sevice\slaServiceAPI.cpp">
-      <Filter>source\Service\API</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Source\API\Models\ssJsonListModel.cpp">
       <Filter>source\API\Models\JsonListModel</Filter>
     </ClCompile>
@@ -74,28 +74,43 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Source\API\Models\ssPagination.cpp">
       <Filter>source\API\Models\Pagination</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Source\API\Models\ssItem.cpp">
+      <Filter>source\API\Models\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Source\API\Models\ssDetailsModel.cpp">
+      <Filter>source\API\Models\DetailsModel</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Source\Sevice\slaServiceAPI.cpp">
+      <Filter>source\Service</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Source\API\ssApibase.h">
-      <Filter>source\API</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Source\Sevice\slaServiceAPI.h">
-      <Filter>source\Service\API</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Source\API\Models\ssJsonListModel.h">
-      <Filter>source\API\Models\JsonListModel</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Source\API\Models\ssRequests.h">
-      <Filter>source\API\Models\Requests</Filter>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\API\Models\ssBaseListModel.h">
+      <Filter>source\API\Models\BaseListModel</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Source\API\Models\ssAbstractJsonListModel.h">
       <Filter>source\API\Models\AbstractJsonListModel</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Source\API\Models\ssBaseListModel.h">
-      <Filter>source\API\Models\BaseListModel</Filter>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\API\ssApibase.h">
+      <Filter>source\API</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\API\Models\ssJsonListModel.h">
+      <Filter>source\API\Models\JsonListModel</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Source\API\Models\ssPagination.h">
       <Filter>source\API\Models\Pagination</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\API\Models\ssRequests.h">
+      <Filter>source\API\Models\Requests</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\API\Models\ssItem.h">
+      <Filter>source\API\Models\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\API\Models\ssDetailsModel.h">
+      <Filter>source\API\Models\DetailsModel</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\Sevice\slaServiceAPI.h">
+      <Filter>source\Service</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

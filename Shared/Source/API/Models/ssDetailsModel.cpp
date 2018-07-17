@@ -1,17 +1,47 @@
-#include "detailsmodel.h"
-#include "baserestlistmodel.h"
+#include "ssDetailsModel.h"
+#include "ssBaseListModel.h"
 #include <QDebug>
+///----------------------------------------------------------------------------
 
-DetailsModel::DetailsModel()
+
+
+///----------------------------------------------------------------------------
+using namespace API;
+///----------------------------------------------------------------------------
+
+
+
+
+
+
+ ///---------------------------------------------------------------------------
+///
+/// constructor
+/// 
+///
+///----------------------------------------------------------------------------
+ADetailsModel :: ADetailsModel()
 {
 
 }
+///----------------------------------------------------------------------------
 
-bool DetailsModel::filterAcceptsRow(int source_row, const QModelIndex &source_parent) const
+
+
+
+
+
+ ///---------------------------------------------------------------------------
+///
+///
+/// 
+///
+///----------------------------------------------------------------------------
+bool ADetailsModel :: filterAcceptsRow(int source_row, const QModelIndex &source_parent) const
 {
     bool ret = false;
 
-    BaseRestListModel *sourceModel = static_cast<BaseRestListModel *> (this->sourceModel());
+	ABaseListModel *sourceModel = static_cast<ABaseListModel *> (this->sourceModel());
 
     if ( sourceModel != nullptr )
     {
@@ -19,7 +49,8 @@ bool DetailsModel::filterAcceptsRow(int source_row, const QModelIndex &source_pa
         if ( index.isValid() )
         {
             QString id = sourceModel->data(index, sourceModel->idFieldRole()).toString();
-            if (id == sourceModel->fetchDetailLastId()) {
+            if (id == sourceModel->fetchDetailLastId()) 
+			{
                 ret = true;
             }
         }
@@ -27,5 +58,20 @@ bool DetailsModel::filterAcceptsRow(int source_row, const QModelIndex &source_pa
 
     return ret;
 }
+///----------------------------------------------------------------------------
 
-void DetailsModel::invalidateModel() { invalidateFilter(); }
+
+
+
+
+
+ ///---------------------------------------------------------------------------
+///
+/// 
+/// 
+///
+///----------------------------------------------------------------------------
+void ADetailsModel :: invalidateModel() 
+{ 
+	invalidateFilter(); 
+}

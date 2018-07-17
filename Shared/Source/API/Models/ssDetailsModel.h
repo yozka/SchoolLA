@@ -1,16 +1,33 @@
-#ifndef DETAILSMODEL_H
-#define DETAILSMODEL_H
-
+#pragma once
 #include <QSortFilterProxyModel>
+///----------------------------------------------------------------------------
 
-class DetailsModel : public QSortFilterProxyModel
+
+namespace API
 {
-    Q_OBJECT
-public:
-    DetailsModel();
+	///----------------------------------------------------------------------------
 
-    bool filterAcceptsRow( int source_row, const QModelIndex& source_parent ) const override;
-    void invalidateModel();
-};
 
-#endif // DETAILSMODEL_H
+
+
+
+
+	///---------------------------------------------------------------------------
+	///
+	/// Один элемент данных
+	/// 
+	///
+	///----------------------------------------------------------------------------
+	class ADetailsModel 
+		: 
+			public QSortFilterProxyModel
+	{
+		Q_OBJECT
+	public:
+		ADetailsModel();
+
+		bool filterAcceptsRow(int source_row, const QModelIndex& source_parent) const override;
+		void invalidateModel();
+	};
+
+}

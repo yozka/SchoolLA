@@ -1,22 +1,78 @@
-#include "jsonrestlistmodel.h"
+#include "ssJsonListModel.h"
+///----------------------------------------------------------------------------
 
-JsonRestListModel::JsonRestListModel(QObject *parent) : AbstractJsonRestListModel(parent)
+
+
+///----------------------------------------------------------------------------
+using namespace API;
+///----------------------------------------------------------------------------
+
+
+
+
+
+
+ ///---------------------------------------------------------------------------
+///
+/// constructor
+/// 
+///
+///----------------------------------------------------------------------------
+AJsonListModel :: AJsonListModel(QObject *parent) 
+	: 
+		AAbstractJsonListModel(parent)
 {
 
 }
+///----------------------------------------------------------------------------
 
-QNetworkReply *JsonRestListModel::fetchMoreImpl(const QModelIndex &parent)
+
+
+
+
+
+ ///---------------------------------------------------------------------------
+///
+/// 
+/// 
+///
+///----------------------------------------------------------------------------
+QNetworkReply *AJsonListModel :: fetchMoreImpl(const QModelIndex &parent)
 {
     Q_UNUSED(parent)
-    return apiInstance()->handleRequest(requests()->get(), sort(), pagination(), filters(), fields(), expand());
+    return apiInstance()->handleRequest(requests()->get(), parameters(), sort(), pagination(), filters(), fields(), expand());
 }
+///----------------------------------------------------------------------------
 
-QNetworkReply *JsonRestListModel::fetchDetailImpl(QString id)
+
+
+
+
+
+ ///---------------------------------------------------------------------------
+///
+/// 
+/// 
+///
+///----------------------------------------------------------------------------
+QNetworkReply *AJsonListModel :: fetchDetailImpl(const QString &id)
 {
-    return apiInstance()->handleRequest(requests()->getDetails(), sort(), pagination(), filters(), fields(), expand(), id);
+    return apiInstance()->handleRequest(requests()->getDetails(), parameters(), sort(), pagination(), filters(), fields(), expand(), id);
 }
+///----------------------------------------------------------------------------
 
-QVariantMap JsonRestListModel::preProcessItem(QVariantMap item)
+
+
+
+
+
+ ///---------------------------------------------------------------------------
+///
+/// 
+/// 
+///
+///----------------------------------------------------------------------------
+QVariantMap AJsonListModel::preProcessItem(const QVariantMap &item)
 {
     return item;
 }

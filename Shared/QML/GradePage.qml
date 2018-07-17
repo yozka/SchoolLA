@@ -8,14 +8,32 @@
 
 import QtQuick 2.6
 import QtQuick.Controls 2.1
+import com.sla.jsonlistmodel 1.0
 
 Page 
 {
-    id: root
+	id: root
 
 
 
+	AJsonListModel 
+	{
+		id: gradeModel
+        api: serviceAPI
 
+
+		parameters: {'schoolID': 1, 'test' : 2}
+
+
+        idField: 'id'
+
+        requests 
+		{
+            get: "grade"
+        }
+
+        Component.onCompleted: { console.log(pagination.perPage); reload(); }
+	}
 
 
 
@@ -38,14 +56,18 @@ Page
         bottomMargin: 48
         rightMargin: 48
         spacing: 20
-        model: ["Albert Einstein", "Ernest Hemingway", "Hans Gude"]
+        model: gradeModel
         delegate: ItemDelegate 
 		{
-            text: modelData
+            text: name
             width: listView.width - listView.leftMargin - listView.rightMargin
             height: avatar.implicitHeight
             leftPadding: avatar.implicitWidth + 32
-            onClicked: root.StackView.view.push("qrc:/main/ConversationPage.qml", { inConversationWith: modelData })
+            onClicked: 
+			{
+				root.StackView.view.push("qrc:/main/ConversationPage.qml", { inConversationWith: name })
+				gradeModel.parameters = {'test3' : 3}
+			}
 
 			/*
             Image {

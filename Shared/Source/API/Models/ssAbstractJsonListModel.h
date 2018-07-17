@@ -1,21 +1,39 @@
-#ifndef ABSJSONRESTLISTMODEL_H
-#define ABSJSONRESTLISTMODEL_H
+#pragma once
+#include <QNetworkReply>
 
-#include "baserestlistmodel.h"
+#include "ssBaseListModel.h"
+///----------------------------------------------------------------------------
 
-class QNetworkReply;
 
-class AbstractJsonRestListModel : public BaseRestListModel
+namespace API
 {
-    Q_OBJECT
-public:
-    explicit AbstractJsonRestListModel(QObject *parent = 0);
+	///----------------------------------------------------------------------------
 
-protected:
-    //for get list
-    virtual QVariantList getVariantList(QByteArray bytes);
-    //for get details for one element
-    virtual QVariantMap getVariantMap(QByteArray bytes);
-};
 
-#endif // ABSJSONRESTLISTMODEL_H
+
+
+
+
+	 ///---------------------------------------------------------------------------
+	///
+	/// Абстрактная модель данных
+	/// 
+	///
+	///----------------------------------------------------------------------------
+	class AAbstractJsonListModel 
+		: 
+			public ABaseListModel
+	{
+		Q_OBJECT
+	public:
+		explicit AAbstractJsonListModel(QObject *parent = 0);
+
+	protected:
+
+		//for get list
+		virtual QVariantList getVariantList(const QByteArray &bytes);
+		//for get details for one element
+		virtual QVariantMap getVariantMap(const QByteArray &bytes);
+	};
+
+}

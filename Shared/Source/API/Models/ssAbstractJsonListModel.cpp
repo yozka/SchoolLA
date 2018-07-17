@@ -1,38 +1,84 @@
-#include "abstractjsonrestlistmodel.h"
+#include "ssAbstractJsonListModel.h"
 #include <QJsonArray>
 #include <QJsonObject>
 #include <QNetworkReply>
 #include <QJsonDocument>
+///----------------------------------------------------------------------------
 
-AbstractJsonRestListModel::AbstractJsonRestListModel(QObject *parent) : BaseRestListModel(parent)
+
+
+///----------------------------------------------------------------------------
+using namespace API;
+///----------------------------------------------------------------------------
+
+
+
+
+
+
+ ///---------------------------------------------------------------------------
+///
+/// constructor
+/// 
+///
+///----------------------------------------------------------------------------
+AAbstractJsonListModel :: AAbstractJsonListModel(QObject *parent) 
+	: 
+		ABaseListModel(parent)
 {
-    setAccept("application/json");
+    //setAccept("application/json");
 }
+///----------------------------------------------------------------------------
 
-QVariantList AbstractJsonRestListModel::getVariantList(QByteArray bytes)
+
+
+
+
+
+ ///---------------------------------------------------------------------------
+///
+/// 
+/// 
+///
+///----------------------------------------------------------------------------
+QVariantList AAbstractJsonListModel::getVariantList(const QByteArray &bytes)
 {
-    QString str = QString::fromUtf8(bytes.data(), bytes.size());
+    const QString str = QString::fromUtf8(bytes.constData(), bytes.size());
 
     QJsonParseError parseError;
-    QJsonDocument document = QJsonDocument::fromJson(bytes, &parseError);
-    QJsonArray jsonArray = document.array();
+    const QJsonDocument document = QJsonDocument::fromJson(bytes, &parseError);
+    const QJsonArray jsonArray = document.array();
 
-    if (parseError.error != QJsonParseError::NoError) {
+    if (parseError.error != QJsonParseError::NoError) 
+	{
         qDebug() << parseError.errorString();
     }
 
     return jsonArray.toVariantList();
 }
+///----------------------------------------------------------------------------
 
-QVariantMap AbstractJsonRestListModel::getVariantMap(QByteArray bytes)
+
+
+
+
+
+ ///---------------------------------------------------------------------------
+///
+/// 
+/// 
+///
+///----------------------------------------------------------------------------
+QVariantMap AAbstractJsonListModel :: getVariantMap(const QByteArray &bytes)
 {
-    QString str = QString::fromUtf8(bytes.data(), bytes.size());
+    const QString str = QString::fromUtf8(bytes.constData(), bytes.size());
 
     QJsonParseError parseError;
-    QJsonDocument document = QJsonDocument::fromJson(bytes, &parseError);
-    QJsonObject obj = document.object();
+    const QJsonDocument document = QJsonDocument::fromJson(bytes, &parseError);
+    const QJsonObject obj = document.object();
 
-    if (parseError.error != QJsonParseError::NoError) {
+    if (parseError.error != QJsonParseError::NoError) 
+	{
         qDebug() << parseError.errorString();
     }
 

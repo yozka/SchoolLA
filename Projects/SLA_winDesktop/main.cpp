@@ -4,6 +4,7 @@
 
 
 #include "Source\Sevice\slaServiceAPI.h"
+#include "Source\API\Models\ssJsonListModel.h"
 
 /*
 #include <QNetworkRequest>
@@ -60,6 +61,8 @@ int main(int argc, char *argv[])
 
 	
 	AServiceAPI::declareQML();
+	API::AJsonListModel::declareQML();
+
 
 	QQmlApplicationEngine engine;
 	engine.load(QUrl(QStringLiteral("qrc:/main/main.qml")));

@@ -1,176 +1,490 @@
-#include "pagination.h"
+#include "ssPagination.h"
+///----------------------------------------------------------------------------
 
-Pagination::Pagination(QObject *parent) : QObject(parent),
-    m_perPage(20), m_currentPage(0), m_currentPageHeader("X-Pagination-Current-Page"), m_totalCount(0),
-    m_totalCountHeader("X-Pagination-Total-Count"), m_pageCount(0), m_pageCountHeader("X-Pagination-Page-Count")
+
+
+
+///----------------------------------------------------------------------------
+using namespace API;
+///----------------------------------------------------------------------------
+
+
+
+
+
+
+ ///---------------------------------------------------------------------------
+///
+/// Constructor
+/// 
+///
+///----------------------------------------------------------------------------
+APagination :: APagination(QObject *parent) 
+	: 
+	QObject(parent),
+    mPerPage(20), 
+	mCurrentPage(0), 
+	mCurrentPageHeader("X-Pagination-Current-Page"), 
+	mTotalCount(0),
+    mTotalCountHeader("X-Pagination-Total-Count"), 
+	mPageCount(0),
+	mPageCountHeader("X-Pagination-Page-Count")
 {
 
 }
+///----------------------------------------------------------------------------
 
-int Pagination::perPage() const
+
+
+
+
+
+ ///---------------------------------------------------------------------------
+///
+///  
+/// 
+///
+///----------------------------------------------------------------------------
+int APagination :: perPage() const
 {
-    return m_perPage;
+    return mPerPage;
 }
+///----------------------------------------------------------------------------
 
-int Pagination::currentPage() const
+
+
+
+
+
+ ///---------------------------------------------------------------------------
+///
+///  
+/// 
+///
+///----------------------------------------------------------------------------
+int APagination :: currentPage() const
 {
-    return m_currentPage;
+    return mCurrentPage;
 }
+///----------------------------------------------------------------------------
 
-QString Pagination::currentPageHeader() const
+
+
+
+
+
+ ///---------------------------------------------------------------------------
+///
+///  
+/// 
+///
+///----------------------------------------------------------------------------
+QString APagination :: currentPageHeader() const
 {
-    return m_currentPageHeader;
+    return mCurrentPageHeader;
 }
+///----------------------------------------------------------------------------
 
-int Pagination::totalCount() const
+
+
+
+
+
+ ///---------------------------------------------------------------------------
+///
+///  
+/// 
+///
+///----------------------------------------------------------------------------
+int APagination :: totalCount() const
 {
-    return m_totalCount;
+    return mTotalCount;
 }
+///----------------------------------------------------------------------------
 
-QString Pagination::totalCountHeader() const
+
+
+
+
+
+ ///---------------------------------------------------------------------------
+///
+///  
+/// 
+///
+///----------------------------------------------------------------------------
+QString APagination :: totalCountHeader() const
 {
-    return m_totalCountHeader;
+    return mTotalCountHeader;
 }
+///----------------------------------------------------------------------------
 
-int Pagination::pageCount() const
+
+
+
+
+
+ ///---------------------------------------------------------------------------
+///
+///  
+/// 
+///
+///----------------------------------------------------------------------------
+int APagination :: pageCount() const
 {
-    return m_pageCount;
+    return mPageCount;
 }
+///----------------------------------------------------------------------------
 
-QString Pagination::pageCountHeader() const
+
+
+
+
+
+ ///---------------------------------------------------------------------------
+///
+///  
+/// 
+///
+///----------------------------------------------------------------------------
+QString APagination :: pageCountHeader() const
 {
-    return m_pageCountHeader;
+    return mPageCountHeader;
 }
+///----------------------------------------------------------------------------
 
-Pagination::PaginationPolicy Pagination::policy() const
+
+
+
+
+
+ ///---------------------------------------------------------------------------
+///
+///  
+/// 
+///
+///----------------------------------------------------------------------------
+APagination::PaginationPolicy APagination::policy() const
 {
-    return m_policy;
+    return mPolicy;
 }
+///----------------------------------------------------------------------------
 
-int Pagination::limit() const
+
+
+
+
+
+ ///---------------------------------------------------------------------------
+///
+///  
+/// 
+///
+///----------------------------------------------------------------------------
+int APagination :: limit() const
 {
-    return m_limit;
+    return mLimit;
 }
+///----------------------------------------------------------------------------
 
-int Pagination::offset() const
+
+
+
+
+
+ ///---------------------------------------------------------------------------
+///
+///  
+/// 
+///
+///----------------------------------------------------------------------------
+int APagination :: offset() const
 {
-    return m_offset;
+    return mOffset;
 }
+///----------------------------------------------------------------------------
 
-QString Pagination::cursorQueryParam() const
+
+
+
+
+
+ ///---------------------------------------------------------------------------
+///
+///  
+/// 
+///
+///----------------------------------------------------------------------------
+QString APagination :: cursorQueryParam() const
 {
-    return m_cursorQueryParam;
+    return mCursorQueryParam;
 }
+///----------------------------------------------------------------------------
 
-QString Pagination::cursorValue() const
+
+
+
+
+
+ ///---------------------------------------------------------------------------
+///
+///  
+/// 
+///
+///----------------------------------------------------------------------------
+QString APagination :: cursorValue() const
 {
-    return m_cursorValue;
+    return mCursorValue;
 }
+///----------------------------------------------------------------------------
 
-void Pagination::setPerPage(int perPage)
+
+
+
+
+
+ ///---------------------------------------------------------------------------
+///
+///  
+/// 
+///
+///----------------------------------------------------------------------------
+void APagination :: setPerPage(int perPage)
 {
-    if (m_perPage == perPage)
+    if (mPerPage == perPage)
         return;
 
-    m_perPage = perPage;
+    mPerPage = perPage;
     emit perPageChanged(perPage);
 }
+///----------------------------------------------------------------------------
 
-void Pagination::setCurrentPage(int currentPage)
+
+
+
+
+
+ ///---------------------------------------------------------------------------
+///
+///  
+/// 
+///
+///----------------------------------------------------------------------------
+void APagination::setCurrentPage(int currentPage)
 {
-    if (m_currentPage == currentPage)
+    if (mCurrentPage == currentPage)
         return;
 
-    m_currentPage = currentPage;
+    mCurrentPage = currentPage;
     emit currentPageChanged(currentPage);
 }
+///----------------------------------------------------------------------------
 
-void Pagination::setCurrentPageHeader(QString currentPageHeader)
+
+
+
+
+
+ ///---------------------------------------------------------------------------
+///
+///  
+/// 
+///
+///----------------------------------------------------------------------------
+void APagination::setCurrentPageHeader(QString currentPageHeader)
 {
-    if (m_currentPageHeader == currentPageHeader)
+    if (mCurrentPageHeader == currentPageHeader)
         return;
 
-    m_currentPageHeader = currentPageHeader;
+    mCurrentPageHeader = currentPageHeader;
     emit currentPageHeaderChanged(currentPageHeader);
 }
+///----------------------------------------------------------------------------
 
-void Pagination::setTotalCount(int totalCount)
+
+
+
+
+
+ ///---------------------------------------------------------------------------
+///
+///  
+/// 
+///
+///----------------------------------------------------------------------------
+void APagination :: setTotalCount(int totalCount)
 {
-    if (m_totalCount == totalCount)
+    if (mTotalCount == totalCount)
         return;
 
-    m_totalCount = totalCount;
+    mTotalCount = totalCount;
     emit totalCountChanged(totalCount);
 }
+///----------------------------------------------------------------------------
 
-void Pagination::setTotalCountHeader(QString totalCountHeader)
+
+
+
+
+
+ ///---------------------------------------------------------------------------
+///
+///  
+/// 
+///
+///----------------------------------------------------------------------------
+void APagination :: setTotalCountHeader(QString totalCountHeader)
 {
-    if (m_totalCountHeader == totalCountHeader)
+    if (mTotalCountHeader == totalCountHeader)
         return;
 
-    m_totalCountHeader = totalCountHeader;
+    mTotalCountHeader = totalCountHeader;
     emit totalCountHeaderChanged(totalCountHeader);
 }
+///----------------------------------------------------------------------------
 
-void Pagination::setPageCount(int pageCount)
+
+
+
+
+
+ ///---------------------------------------------------------------------------
+///
+///  
+/// 
+///
+///----------------------------------------------------------------------------
+void APagination :: setPageCount(int pageCount)
 {
-    if (m_pageCount == pageCount)
+    if (mPageCount == pageCount)
         return;
 
-    m_pageCount = pageCount;
+    mPageCount = pageCount;
     emit pageCountChanged(pageCount);
 }
+///----------------------------------------------------------------------------
 
-void Pagination::setPageCountHeader(QString pageCountHeader)
+
+
+
+
+
+ ///---------------------------------------------------------------------------
+///
+///  
+/// 
+///
+///----------------------------------------------------------------------------
+void APagination::setPageCountHeader(QString pageCountHeader)
 {
-    if (m_pageCountHeader == pageCountHeader)
+    if (mPageCountHeader == pageCountHeader)
         return;
 
-    m_pageCountHeader = pageCountHeader;
+    mPageCountHeader = pageCountHeader;
     emit pageCountHeaderChanged(pageCountHeader);
 }
+///----------------------------------------------------------------------------
 
-void Pagination::setPolicy(Pagination::PaginationPolicy policy)
+
+
+
+
+
+ ///---------------------------------------------------------------------------
+///
+///  
+/// 
+///
+///----------------------------------------------------------------------------
+void APagination :: setPolicy(APagination::PaginationPolicy policy)
 {
-    if (m_policy == policy)
+    if (mPolicy == policy)
         return;
 
-    m_policy = policy;
+    mPolicy = policy;
     emit policyChanged(policy);
 }
+///----------------------------------------------------------------------------
 
-void Pagination::setLimit(int limit)
+
+
+
+
+
+ ///---------------------------------------------------------------------------
+///
+///  
+/// 
+///
+///----------------------------------------------------------------------------
+void APagination :: setLimit(int limit)
 {
-    if (m_limit == limit)
+    if (mLimit == limit)
         return;
 
-    m_limit = limit;
+    mLimit = limit;
     emit limitChanged(limit);
 }
+///----------------------------------------------------------------------------
 
-void Pagination::setOffset(int offset)
+
+
+
+
+
+ ///---------------------------------------------------------------------------
+///
+///  
+/// 
+///
+///----------------------------------------------------------------------------
+void APagination::setOffset(int offset)
 {
-    if (m_offset == offset)
+    if (mOffset == offset)
         return;
 
-    m_offset = offset;
+    mOffset = offset;
     emit offsetChanged(offset);
 }
+///----------------------------------------------------------------------------
 
-void Pagination::setCursorQueryParam(QString cursorQueryParam)
+
+
+
+
+
+ ///---------------------------------------------------------------------------
+///
+///  
+/// 
+///
+///----------------------------------------------------------------------------
+void APagination::setCursorQueryParam(QString cursorQueryParam)
 {
-    if (m_cursorQueryParam == cursorQueryParam)
+    if (mCursorQueryParam == cursorQueryParam)
         return;
 
-    m_cursorQueryParam = cursorQueryParam;
+    mCursorQueryParam = cursorQueryParam;
     emit cursorQueryParamChanged(cursorQueryParam);
 }
+///----------------------------------------------------------------------------
 
-void Pagination::setCursorValue(QString cursorValue)
+
+
+
+
+
+ ///---------------------------------------------------------------------------
+///
+///  
+/// 
+///
+///----------------------------------------------------------------------------
+void APagination::setCursorValue(QString cursorValue)
 {
-    if (m_cursorValue == cursorValue)
+    if (mCursorValue == cursorValue)
         return;
 
-    m_cursorValue = cursorValue;
+    mCursorValue = cursorValue;
     emit cursorValueChanged(cursorValue);
 }

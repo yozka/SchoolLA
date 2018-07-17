@@ -1,94 +1,183 @@
-#include "baserestlistmodel.h"
+#include "ssBaseListModel.h"
 #include <QtQml>
+///----------------------------------------------------------------------------
 
-BaseRestListModel::BaseRestListModel(QObject *parent) : QAbstractListModel(parent), m_roleNamesIndex(0),
-    m_detailRoleNamesGenerated(false), m_sort("-id"), m_loadingStatus(LoadingStatus::Idle), m_apiInstance(nullptr), m_enableDetailsCaching(true)
+
+
+///----------------------------------------------------------------------------
+using namespace API;
+///----------------------------------------------------------------------------
+
+
+
+
+
+
+ ///---------------------------------------------------------------------------
+///
+/// constructor
+/// 
+///
+///----------------------------------------------------------------------------
+ABaseListModel :: ABaseListModel(QObject *parent) 
+	: 
+		QAbstractListModel(parent), 
+		mRoleNamesIndex(0),
+		mDetailRoleNamesGenerated(false), 
+		mSort("-id"), 
+		mLoadingStatus(LoadingStatus::Idle), 
+		mApiInstance(nullptr), 
+		mEnableDetailsCaching(true)
 {
 
 }
+///----------------------------------------------------------------------------
 
-void BaseRestListModel::declareQML()
+
+
+
+
+
+ ///---------------------------------------------------------------------------
+///
+/// 
+/// 
+///
+///----------------------------------------------------------------------------
+void ABaseListModel::declareQML()
 {
-    qRegisterMetaType<DetailsModel*>("DetailsModel*");
-    qmlRegisterType<Pagination>("com.github.qtrest.pagination", 1, 0, "Pagination");
+    qRegisterMetaType<ADetailsModel*>("ADetailsModel*");
+    qmlRegisterType<APagination>("com.sla.pagination", 1, 0, "APagination");
 }
+///----------------------------------------------------------------------------
 
-void BaseRestListModel::reload()
+
+
+
+
+
+ ///---------------------------------------------------------------------------
+///
+/// 
+/// 
+///
+///----------------------------------------------------------------------------
+void ABaseListModel :: reload()
 {
     setLoadingStatus(LoadingStatus::RequestToReload);
     this->fetchMore(QModelIndex());
 }
+///----------------------------------------------------------------------------
 
-bool BaseRestListModel::canFetchMore(const QModelIndex &parent) const
+
+
+
+
+
+ ///---------------------------------------------------------------------------
+///
+/// 
+/// 
+///
+///----------------------------------------------------------------------------
+bool ABaseListModel :: canFetchMore(const QModelIndex &parent) const
 {
     Q_UNUSED(parent)
 
-    switch(m_pagination.policy()) {
-    case Pagination::PageNumber:
-        if (m_pagination.currentPage() < m_pagination.pageCount()) {
-            return true;
-        } else {
-            return false;
-        }
-        break;
-    case Pagination::LimitOffset:
-    case Pagination::Cursor:
-        if (rowCount() < m_pagination.totalCount()) {
-            return true;
-        } else {
-            return false;
-        }
-        break;
-    case Pagination::None:
+    switch(mPagination.policy()) 
+	{
+    case APagination::PageNumber:
+		{
+			if (mPagination.currentPage() < mPagination.pageCount()) 
+			{
+				return true;
+			} 
+			return false;
+		}
+
+    case APagination::LimitOffset:
+    case APagination::Cursor:
+		{
+			if (rowCount() < mPagination.totalCount())
+			{
+				return true;
+			}
+			return false;
+		}
+
+    case APagination::None:
         return false;
-        break;
-    case  Pagination::Infinity:
+
+    case  APagination::Infinity:
         return true;
-        break;
     default:
-        return false;
+		break;
     }
+	return false;
 }
+///----------------------------------------------------------------------------
 
-void BaseRestListModel::fetchMore(const QModelIndex &parent)
+
+
+
+
+
+ ///---------------------------------------------------------------------------
+///
+/// 
+/// 
+///
+///----------------------------------------------------------------------------
+void ABaseListModel :: fetchMore(const QModelIndex &parent)
 {
     Q_UNUSED(parent)
 
-    switch (loadingStatus()) {
+    switch (loadingStatus()) 
+	{
     case LoadingStatus::RequestToReload:
-        m_pagination.setCurrentPage(0);
-        m_pagination.setOffset(0);
-        m_pagination.setCursorValue(0);
-        setLoadingStatus(LoadingStatus::FullReloadProcessing);
-        break;
+		{
+			mPagination.setCurrentPage(0);
+			mPagination.setOffset(0);
+			mPagination.setCursorValue(0);
+			setLoadingStatus(LoadingStatus::FullReloadProcessing);
+			break;
+		}
     case LoadingStatus::Idle:
     case LoadingStatus::IdleDetails:
-        setLoadingStatus(LoadingStatus::LoadMoreProcessing);
-        break;
+		{
+			setLoadingStatus(LoadingStatus::LoadMoreProcessing);
+			break;
+		}
     default:
         return;
-        break;
     }
 
-    switch(m_pagination.policy()) {
-    case Pagination::PageNumber: {
-        int nextPage = m_pagination.currentPage()+1;
-        m_pagination.setCurrentPage(nextPage);
-        break;
-    }
-    case Pagination::LimitOffset: {
-        int offset = m_pagination.offset()+m_pagination.limit();
-        m_pagination.setOffset(offset);
-        break;
-    }
-    case Pagination::Cursor: {
-        QString cursor = 0;
-        if (!m_items.isEmpty()) {
-            cursor = m_items.last().id();
-        }
-        m_pagination.setCursorValue(cursor);
-        break;
-    }
+    switch(mPagination.policy()) 
+	{
+    case APagination::PageNumber: 
+		{
+			const int nextPage = mPagination.currentPage() + 1;
+			mPagination.setCurrentPage(nextPage);
+			break;
+		}
+
+    case APagination::LimitOffset: 
+		{
+			const int offset = mPagination.offset() + mPagination.limit();
+			mPagination.setOffset(offset);
+			break;
+		}
+
+    case APagination::Cursor: 
+		{
+			QString cursor = 0;
+			if (!mItems.isEmpty()) 
+			{
+				cursor = mItems.last().id();
+			}
+			mPagination.setCursorValue(cursor);
+			break;
+		}
     default:
         break;
     }
@@ -96,15 +185,29 @@ void BaseRestListModel::fetchMore(const QModelIndex &parent)
     QNetworkReply *reply = fetchMoreImpl(parent);
     connect(reply, SIGNAL(finished()), this, SLOT(fetchMoreFinished()));
 }
+///----------------------------------------------------------------------------
 
-void BaseRestListModel::fetchMoreFinished()
+
+
+
+
+
+ ///---------------------------------------------------------------------------
+///
+/// 
+/// 
+///
+///----------------------------------------------------------------------------
+void ABaseListModel :: fetchMoreFinished()
 {
     QNetworkReply *reply = qobject_cast<QNetworkReply *>(sender());
-    if (apiInstance()->checkReplyIsError(reply) || !reply->isFinished()) {
+    if (apiInstance()->checkReplyIsError(reply) || !reply->isFinished()) 
+	{
         return;
     }
 
-    if (this->loadingStatus() == LoadingStatus::Idle) {
+    if (this->loadingStatus() == LoadingStatus::Idle) 
+	{
         return;
     }
 
@@ -117,16 +220,21 @@ void BaseRestListModel::fetchMoreFinished()
     int insertCount = rowCount()+values.count();
 
     //check if we need to full reload
-    if (this->loadingStatus() == LoadingStatus::FullReloadProcessing) {
+    if (this->loadingStatus() == LoadingStatus::FullReloadProcessing) 
+	{
         reset();
         insertFrom = rowCount();
         insertCount = values.count();
     }
 
     //check for assertion or empty data
-    if (insertCount < insertFrom) { insertCount = insertFrom; }
+    if (insertCount < insertFrom) 
+	{ 
+		insertCount = insertFrom; 
+	}
 
-    if (insertCount == 0) {
+    if (insertCount == 0) 
+	{
         setLoadingStatus(LoadingStatus::Error);
         emit countChanged();
         qDebug() << "Nothing to insert! Please check your parser!" << count() << loadingStatus();
@@ -134,11 +242,12 @@ void BaseRestListModel::fetchMoreFinished()
     }
 
     //append rows to model
-    beginInsertRows(this->index(rowCount(), 0), insertFrom, insertCount-1);
+    beginInsertRows(this->index(rowCount(), 0), insertFrom, insertCount - 1);
 
     QListIterator<QVariant> i(values);
-    while (i.hasNext()) {
-        RestItem item = createItem(i.next().toMap());
+    while (i.hasNext()) 
+	{
+        AItem item = createItem(i.next().toMap());
         append(item);
     }
 
@@ -151,50 +260,81 @@ void BaseRestListModel::fetchMoreFinished()
 
     emit countChanged();
 }
+///----------------------------------------------------------------------------
 
-void BaseRestListModel::fetchDetail(QString id)
+
+
+
+
+
+ ///---------------------------------------------------------------------------
+///
+/// 
+/// 
+///
+///----------------------------------------------------------------------------
+void ABaseListModel :: fetchDetail(QString id)
 {
-    m_fetchDetailLastId = id;
-    RestItem item = findItemById(id);
+    mFetchDetailLastId = id;
+    AItem item = findItemById(id);
 
-    if (!item.isValid()) {
+    if (!item.isValid()) 
+	{
         qWarning() << QString("No item with id %1").arg(id);
         return;
     }
 
-    if (enableDetailsCaching() && item.isUpdated()) {
+    if (enableDetailsCaching() && item.isUpdated())
+	{
         return;
     }
 
-    switch (loadingStatus()) {
-    case LoadingStatus::Idle:
-    case LoadingStatus::IdleDetails:
-        setLoadingStatus(LoadingStatus::LoadDetailsProcessing);
-        break;
-    default:
-        return;
-        break;
+    switch (loadingStatus()) 
+	{
+		case LoadingStatus::Idle:
+		case LoadingStatus::IdleDetails:
+		{
+			setLoadingStatus(LoadingStatus::LoadDetailsProcessing);
+			break;
+		}
+		default:
+			return;
     }
 
-    m_detailsModel.invalidateModel();
+    mDetailsModel.invalidateModel();
 
     // clean up the details model (QQmlPropertyMap)
-    for (const QString &key : m_details.keys()) {
-        m_details.clear(key);
+    for (const QString &key : mDetails.keys()) 
+	{
+        mDetails.clear(key);
     }
 
     QNetworkReply *reply = fetchDetailImpl(id);
     connect(reply, SIGNAL(finished()), this, SLOT(fetchDetailFinished()));
 }
+///----------------------------------------------------------------------------
 
-void BaseRestListModel::fetchDetailFinished()
+
+
+
+
+
+ ///---------------------------------------------------------------------------
+///
+/// 
+/// 
+///
+///----------------------------------------------------------------------------
+void ABaseListModel :: fetchDetailFinished()
 {
     QNetworkReply *reply = qobject_cast<QNetworkReply *>(sender());
-    if (apiInstance()->checkReplyIsError(reply) || !reply->isFinished()) {
+    if (apiInstance()->checkReplyIsError(reply) || !reply->isFinished()) 
+	{
         return;
     }
 
-    if (this->loadingStatus() == LoadingStatus::Idle) {
+    if (this->loadingStatus() == LoadingStatus::Idle) 
+	{
         return;
     }
 
@@ -208,350 +348,908 @@ void BaseRestListModel::fetchDetailFinished()
 
     // fill up the details model (QQmlPropertyMap)
     QMapIterator<QString, QVariant> i(item);
-    while (i.hasNext()) {
+    while (i.hasNext()) 
+	{
         i.next();
-        m_details.insert(i.key(), i.value());
+        mDetails.insert(i.key(), i.value());
     }
 
     setLoadingStatus(LoadingStatus::IdleDetails);
 }
+///----------------------------------------------------------------------------
 
-void BaseRestListModel::setLoadingStatus(BaseRestListModel::LoadingStatus loadingStatus)
+
+
+
+
+
+ ///---------------------------------------------------------------------------
+///
+/// 
+/// 
+///
+///----------------------------------------------------------------------------
+void ABaseListModel :: setLoadingStatus(ABaseListModel::LoadingStatus loadingStatus)
 {
-    if (m_loadingStatus == loadingStatus) {
+    if (mLoadingStatus == loadingStatus) 
+	{
         return;
     }
 
-    m_loadingStatus = loadingStatus;
+    mLoadingStatus = loadingStatus;
     emit loadingStatusChanged(loadingStatus);
 }
+///----------------------------------------------------------------------------
 
-void BaseRestListModel::setAccept(QString accept)
+
+
+
+
+
+ ///---------------------------------------------------------------------------
+///
+/// 
+/// 
+///
+///----------------------------------------------------------------------------
+void ABaseListModel :: setAccept(QString accept)
 {
     apiInstance()->setAccept(accept);
 }
+///----------------------------------------------------------------------------
 
-void BaseRestListModel::setLoadingErrorString(QString loadingErrorString)
+
+
+
+
+
+ ///---------------------------------------------------------------------------
+///
+/// 
+/// 
+///
+///----------------------------------------------------------------------------
+void ABaseListModel :: setLoadingErrorString(QString loadingErrorString)
 {
-    if (m_loadingErrorString == loadingErrorString)
+    if (mLoadingErrorString == loadingErrorString)
         return;
 
-    m_loadingErrorString = loadingErrorString;
+    mLoadingErrorString = loadingErrorString;
     emit loadingErrorStringChanged(loadingErrorString);
 }
+///----------------------------------------------------------------------------
 
-void BaseRestListModel::setLoadingErrorCode(QNetworkReply::NetworkError loadingErrorCode)
+
+
+
+
+
+ ///---------------------------------------------------------------------------
+///
+/// 
+/// 
+///
+///----------------------------------------------------------------------------
+void ABaseListModel :: setLoadingErrorCode(QNetworkReply::NetworkError loadingErrorCode)
 {
-    if (m_loadingErrorCode == loadingErrorCode)
+    if (mLoadingErrorCode == loadingErrorCode)
         return;
 
-    m_loadingErrorCode = loadingErrorCode;
+    mLoadingErrorCode = loadingErrorCode;
     emit loadingErrorCodeChanged(loadingErrorCode);
 }
+///----------------------------------------------------------------------------
 
-bool BaseRestListModel::enableDetailsCaching() const
+
+
+
+
+
+ ///---------------------------------------------------------------------------
+///
+/// 
+/// 
+///
+///----------------------------------------------------------------------------
+bool ABaseListModel :: enableDetailsCaching() const
 {
-    return m_enableDetailsCaching;
+    return mEnableDetailsCaching;
 }
+///----------------------------------------------------------------------------
 
-void BaseRestListModel::setEnableDetailsCaching(bool enableDetailsCaching)
+
+
+
+
+
+ ///---------------------------------------------------------------------------
+///
+/// 
+/// 
+///
+///----------------------------------------------------------------------------
+void ABaseListModel::setEnableDetailsCaching(bool enableDetailsCaching)
 {
-    if (m_enableDetailsCaching == enableDetailsCaching) {
+    if (mEnableDetailsCaching == enableDetailsCaching) 
+	{
         return;
     }
 
-    m_enableDetailsCaching = enableDetailsCaching;
+    mEnableDetailsCaching = enableDetailsCaching;
     emit enableDetailsCachingChanged(enableDetailsCaching);
 }
+///----------------------------------------------------------------------------
 
-void BaseRestListModel::replyError(QNetworkReply *reply, QNetworkReply::NetworkError error, QString errorString)
+
+
+
+
+
+ ///---------------------------------------------------------------------------
+///
+/// 
+/// 
+///
+///----------------------------------------------------------------------------
+void ABaseListModel::replyError(QNetworkReply *reply, QNetworkReply::NetworkError error, QString errorString)
 {
     Q_UNUSED(reply)
     setLoadingErrorCode(error);
     setLoadingErrorString(errorString);
     setLoadingStatus(LoadingStatus::Error);
 }
+///----------------------------------------------------------------------------
 
-RestItem BaseRestListModel::createItem(QVariantMap value)
+
+
+
+
+
+ ///---------------------------------------------------------------------------
+///
+/// 
+/// 
+///
+///----------------------------------------------------------------------------
+AItem ABaseListModel :: createItem(const QVariantMap &value)
 {
-    return RestItem(preProcessItem(value),idField());
+    return AItem(preProcessItem(value),idField());
 }
+///----------------------------------------------------------------------------
 
-RestItem BaseRestListModel::findItemById(QString id)
+
+
+
+
+
+ ///---------------------------------------------------------------------------
+///
+/// 
+/// 
+///
+///----------------------------------------------------------------------------
+AItem ABaseListModel :: findItemById(const QString &id)
 {
-    QListIterator<RestItem> i(m_items);
-    while (i.hasNext()) {
-        RestItem item = i.next();
-        if (item.id() == id) {
+    QListIterator<AItem> i(mItems);
+    while (i.hasNext()) 
+	{
+        AItem item = i.next();
+        if (item.id() == id) 
+		{
             return item;
         }
     }
 
-    return RestItem();
+    return AItem();
 }
+///----------------------------------------------------------------------------
 
-void BaseRestListModel::updateItem(QVariantMap value)
+
+
+
+
+
+ ///---------------------------------------------------------------------------
+///
+/// 
+/// 
+///
+///----------------------------------------------------------------------------
+void ABaseListModel :: updateItem(const QVariantMap &value)
 {
-    QString id = fetchDetailLastId();
-    RestItem item = findItemById(id);
+    const QString id = fetchDetailLastId();
+    AItem item = findItemById(id);
 
-    if (!item.isValid()) {
+    if (!item.isValid()) 
+	{
         qWarning() << QString("No item with id %1").arg(id);
         return;
     }
 
-    int row = m_items.indexOf(item);
+    const int row = mItems.indexOf(item);
     item.update(value);
-    m_items.replace(row, item);
+    mItems.replace(row, item);
     emit dataChanged(index(row),index(row));
 }
+///----------------------------------------------------------------------------
 
-QVariant BaseRestListModel::data(const QModelIndex &index, int role) const
+
+
+
+
+
+ ///---------------------------------------------------------------------------
+///
+/// 
+/// 
+///
+///----------------------------------------------------------------------------
+QVariant ABaseListModel :: data(const QModelIndex &index, int role) const
 {
-    if (index.row() < 0 || index.row() >= m_items.count()) {
+    if (index.row() < 0 || index.row() >= mItems.count()) 
+	{
         qDebug() << "Row not found" << index.row();
         return QVariant();
     }
 
-    RestItem item = m_items.at(index.row());
-    return item.value(m_roleNames[role]);
+    const AItem item = mItems.at(index.row());
+    return item.value(mRoleNames[role]);
 }
+///----------------------------------------------------------------------------
 
-QStringList BaseRestListModel::sort() const
+
+
+
+
+
+ ///---------------------------------------------------------------------------
+///
+/// 
+/// 
+///
+///----------------------------------------------------------------------------
+QStringList ABaseListModel :: sort() const
 {
-    return m_sort;
+    return mSort;
 }
+///----------------------------------------------------------------------------
 
-BaseRestListModel::LoadingStatus BaseRestListModel::loadingStatus() const
+
+
+
+
+
+ ///---------------------------------------------------------------------------
+///
+/// 
+/// 
+///
+///----------------------------------------------------------------------------
+ABaseListModel :: LoadingStatus ABaseListModel::loadingStatus() const
 {
-    return m_loadingStatus;
+    return mLoadingStatus;
 }
+///----------------------------------------------------------------------------
 
-QVariantMap BaseRestListModel::filters() const
+
+
+
+
+
+ ///---------------------------------------------------------------------------
+///
+/// 
+/// 
+///
+///----------------------------------------------------------------------------
+QVariantMap ABaseListModel :: filters() const
 {
-    return m_filters;
+    return mFilters;
 }
+///----------------------------------------------------------------------------
 
-QString BaseRestListModel::loadingErrorString() const
+
+
+
+ ///---------------------------------------------------------------------------
+///
+/// 
+/// 
+///
+///----------------------------------------------------------------------------
+QVariantMap ABaseListModel::parameters() const
 {
-    return m_loadingErrorString;
+	return mParameters;
 }
+///----------------------------------------------------------------------------
 
-QNetworkReply::NetworkError BaseRestListModel::loadingErrorCode() const
+
+
+
+
+ ///---------------------------------------------------------------------------
+///
+/// 
+/// 
+///
+///----------------------------------------------------------------------------
+QString ABaseListModel :: loadingErrorString() const
 {
-    return m_loadingErrorCode;
+    return mLoadingErrorString;
 }
+///----------------------------------------------------------------------------
 
-QStringList BaseRestListModel::fields() const
+
+
+
+
+
+ ///---------------------------------------------------------------------------
+///
+/// 
+/// 
+///
+///----------------------------------------------------------------------------
+QNetworkReply::NetworkError ABaseListModel :: loadingErrorCode() const
 {
-    return m_fields;
+    return mLoadingErrorCode;
 }
+///----------------------------------------------------------------------------
 
-QStringList BaseRestListModel::expand() const
+
+
+
+
+
+ ///---------------------------------------------------------------------------
+///
+/// 
+/// 
+///
+///----------------------------------------------------------------------------
+QStringList ABaseListModel :: fields() const
 {
-    return m_expand;
+    return mFields;
 }
+///----------------------------------------------------------------------------
 
-QString BaseRestListModel::idField() const
+
+
+
+
+
+ ///---------------------------------------------------------------------------
+///
+/// 
+/// 
+///
+///----------------------------------------------------------------------------
+QStringList ABaseListModel :: expand() const
 {
-    return m_idField;
+    return mExpand;
 }
+///----------------------------------------------------------------------------
 
-int BaseRestListModel::idFieldRole() const
+
+
+
+
+
+ ///---------------------------------------------------------------------------
+///
+/// 
+/// 
+///
+///----------------------------------------------------------------------------
+QString ABaseListModel::idField() const
+{
+    return mIdField;
+}
+///----------------------------------------------------------------------------
+
+
+
+
+
+
+ ///---------------------------------------------------------------------------
+///
+/// 
+/// 
+///
+///----------------------------------------------------------------------------
+int ABaseListModel :: idFieldRole() const
 {
     QByteArray obj;
     obj.append(idField());
-    return m_roleNames.key(obj);
+    return mRoleNames.key(obj);
 }
+///----------------------------------------------------------------------------
 
-QString BaseRestListModel::fetchDetailLastId() const
+
+
+
+
+
+ ///---------------------------------------------------------------------------
+///
+/// 
+/// 
+///
+///----------------------------------------------------------------------------
+QString ABaseListModel :: fetchDetailLastId() const
 {
-    return m_fetchDetailLastId;
+    return mFetchDetailLastId;
 }
+///----------------------------------------------------------------------------
 
-DetailsModel *BaseRestListModel::detailsModel()
+
+
+
+
+
+ ///---------------------------------------------------------------------------
+///
+/// 
+/// 
+///
+///----------------------------------------------------------------------------
+ADetailsModel *ABaseListModel :: detailsModel()
 {
-    return &m_detailsModel;
+    return &mDetailsModel;
 }
+///----------------------------------------------------------------------------
 
-QQmlPropertyMap *BaseRestListModel::details()
+
+
+
+
+
+ ///---------------------------------------------------------------------------
+///
+/// 
+/// 
+///
+///----------------------------------------------------------------------------
+QQmlPropertyMap *ABaseListModel :: details()
 {
-    return &m_details;
+    return &mDetails;
 }
+///----------------------------------------------------------------------------
 
-Pagination *BaseRestListModel::pagination()
+
+
+
+
+
+ ///---------------------------------------------------------------------------
+///
+/// 
+/// 
+///
+///----------------------------------------------------------------------------
+APagination *ABaseListModel :: pagination()
 {
-    return &m_pagination;
+    return &mPagination;
 }
+///----------------------------------------------------------------------------
 
-QByteArray BaseRestListModel::accept()
+
+
+
+
+
+ ///---------------------------------------------------------------------------
+///
+/// 
+/// 
+///
+///----------------------------------------------------------------------------
+QByteArray ABaseListModel::accept()
 {
     return apiInstance()->accept();
 }
+///----------------------------------------------------------------------------
 
-int BaseRestListModel::count() const
+
+
+
+
+
+ ///---------------------------------------------------------------------------
+///
+/// 
+/// 
+///
+///----------------------------------------------------------------------------
+int ABaseListModel::count() const
 {
-    return m_items.count();
+    return mItems.count();
 }
+///----------------------------------------------------------------------------
 
-QHash<int, QByteArray> BaseRestListModel::roleNames() const
+
+
+
+
+
+ ///---------------------------------------------------------------------------
+///
+/// 
+/// 
+///
+///----------------------------------------------------------------------------
+QHash<int, QByteArray> ABaseListModel :: roleNames() const
 {
-    return m_roleNames;
+    return mRoleNames;
 }
+///----------------------------------------------------------------------------
 
-QHash<int, QByteArray> BaseRestListModel::detailsRoleNames() const
+
+
+
+
+
+ ///---------------------------------------------------------------------------
+///
+/// 
+/// 
+///
+///----------------------------------------------------------------------------
+QHash<int, QByteArray> ABaseListModel :: detailsRoleNames() const
 {
-    return m_roleNames;
+    return mRoleNames;
 }
+///----------------------------------------------------------------------------
 
-void BaseRestListModel::updateHeadersData(QNetworkReply *reply)
+
+
+
+
+
+ ///---------------------------------------------------------------------------
+///
+/// 
+/// 
+///
+///----------------------------------------------------------------------------
+void ABaseListModel :: updateHeadersData(QNetworkReply *reply)
 {
     //update headers data
     QByteArray currentPage;
-    currentPage.append(m_pagination.currentPageHeader());
+    currentPage.append(mPagination.currentPageHeader());
     QByteArray totalCount;
-    totalCount.append(m_pagination.totalCountHeader());
+    totalCount.append(mPagination.totalCountHeader());
     QByteArray pageCount;
-    pageCount.append(m_pagination.pageCountHeader());
+    pageCount.append(mPagination.pageCountHeader());
 
-    m_pagination.setCurrentPage(reply->rawHeader(currentPage).toInt());
-    m_pagination.setTotalCount(reply->rawHeader(totalCount).toInt());
-    m_pagination.setPageCount(reply->rawHeader(pageCount).toInt());
+    mPagination.setCurrentPage(reply->rawHeader(currentPage).toInt());
+    mPagination.setTotalCount(reply->rawHeader(totalCount).toInt());
+    mPagination.setPageCount(reply->rawHeader(pageCount).toInt());
     reply->deleteLater();
 
     //todo other headers (limit offset and cursor)
 }
+///----------------------------------------------------------------------------
 
-void BaseRestListModel::reset()
+
+
+
+
+
+ ///---------------------------------------------------------------------------
+///
+/// 
+/// 
+///
+///----------------------------------------------------------------------------
+void ABaseListModel :: reset()
 {
     beginResetModel();
-    m_items.clear();
+    mItems.clear();
     endResetModel();
 }
+///----------------------------------------------------------------------------
 
-void BaseRestListModel::append(RestItem item)
+
+
+
+
+
+ ///---------------------------------------------------------------------------
+///
+/// 
+/// 
+///
+///----------------------------------------------------------------------------
+void ABaseListModel :: append(const AItem &item)
 {
-    m_items.append(item);
+    mItems.append(item);
 }
+///----------------------------------------------------------------------------
 
-void BaseRestListModel::generateRoleNames()
+
+
+
+
+
+ ///---------------------------------------------------------------------------
+///
+/// 
+/// 
+///
+///----------------------------------------------------------------------------
+void ABaseListModel :: generateRoleNames()
 {
-    if (m_roleNamesIndex > 0) {
+    if (mRoleNamesIndex > 0) 
+	{
         return;
     }
 
-    RestItem item = m_items[0];
+    AItem item = mItems[0];
 
-    QStringList keys = item.keys();
+	const QStringList keys = item.keys();
 
-    if (rowCount() > 0) {
-        foreach (QString key, keys) {
+    if (rowCount() > 0) 
+	{
+        foreach (QString key, keys) 
+		{
             QByteArray k;
             k.append(key);
-            if (!m_roleNames.key(k)) {
-                m_roleNamesIndex++;
-                m_roleNames[m_roleNamesIndex] = k;
+            if (!mRoleNames.key(k)) 
+			{
+                mRoleNamesIndex++;
+                mRoleNames[mRoleNamesIndex] = k;
             }
         }
     }
 }
+///----------------------------------------------------------------------------
 
-void BaseRestListModel::generateDetailsRoleNames(QVariantMap item)
+
+
+
+
+
+ ///---------------------------------------------------------------------------
+///
+/// 
+/// 
+///
+///----------------------------------------------------------------------------
+void ABaseListModel :: generateDetailsRoleNames(const QVariantMap &item)
 {
-    if (m_detailRoleNamesGenerated) { return; }
+    if (mDetailRoleNamesGenerated) 
+	{ 
+		return; 
+	}
 
-    QStringList keys = item.keys();
+    const QStringList keys = item.keys();
 
-    if (rowCount() > 0) {
-        foreach (QString key, keys) {
+    if (rowCount() > 0) 
+	{
+        foreach (QString key, keys) 
+		{
             QByteArray k = key.toUtf8();
-            if (!m_roleNames.key(k)) {
-                m_roleNamesIndex++;
-                m_roleNames[m_roleNamesIndex] = k;
+            if (!mRoleNames.key(k)) 
+			{
+                mRoleNamesIndex++;
+                mRoleNames[mRoleNamesIndex] = k;
             }
         }
     }
 
-    m_detailRoleNamesGenerated = true;
+    mDetailRoleNamesGenerated = true;
 }
+///----------------------------------------------------------------------------
 
-int BaseRestListModel::rowCount(const QModelIndex &parent) const
+
+
+
+
+
+ ///---------------------------------------------------------------------------
+///
+/// 
+/// 
+///
+///----------------------------------------------------------------------------
+int ABaseListModel :: rowCount(const QModelIndex &parent) const
 {
     Q_UNUSED(parent);
-    return m_items.count();
+    return mItems.count();
 }
+///----------------------------------------------------------------------------
 
-void BaseRestListModel::requestToReload() {
+
+
+
+
+
+ ///---------------------------------------------------------------------------
+///
+/// 
+/// 
+///
+///----------------------------------------------------------------------------
+void ABaseListModel :: requestToReload() 
+{
     setLoadingStatus(LoadingStatus::RequestToReload);
 }
+///----------------------------------------------------------------------------
 
-void BaseRestListModel::forceIdle() {
+
+
+
+
+
+ ///---------------------------------------------------------------------------
+///
+/// 
+/// 
+///
+///----------------------------------------------------------------------------
+void ABaseListModel::forceIdle() 
+{
     setLoadingStatus(LoadingStatus::Idle);
 }
+///----------------------------------------------------------------------------
 
-void BaseRestListModel::setSort(QStringList sort)
+
+
+
+
+
+ ///---------------------------------------------------------------------------
+///
+/// 
+/// 
+///
+///----------------------------------------------------------------------------
+void ABaseListModel :: setSort(QStringList sort)
 {
-    if (m_sort == sort)
+    if (mSort == sort)
         return;
 
-    m_sort = sort;
+    mSort = sort;
     emit sortChanged(sort);
 }
+///----------------------------------------------------------------------------
 
-void BaseRestListModel::setFilters(QVariantMap filters)
+
+
+
+
+
+ ///---------------------------------------------------------------------------
+///
+/// 
+/// 
+///
+///----------------------------------------------------------------------------
+void ABaseListModel :: setFilters(QVariantMap filters)
 {
-    if (m_filters == filters)
+    if (mFilters == filters)
         return;
 
-    m_filters = filters;
+    mFilters = filters;
     emit filtersChanged(filters);
 }
+///----------------------------------------------------------------------------
 
-void BaseRestListModel::setFields(QStringList fields)
+
+
+
+
+
+ ///---------------------------------------------------------------------------
+///
+/// 
+/// 
+///
+///----------------------------------------------------------------------------
+void ABaseListModel :: setFields(QStringList fields)
 {
-    if (m_fields == fields)
+    if (mFields == fields)
         return;
 
-    m_fields = fields;
+    mFields = fields;
     emit fieldsChanged(fields);
 }
+///----------------------------------------------------------------------------
 
-void BaseRestListModel::setExpand(QStringList expand)
+
+
+
+
+ ///---------------------------------------------------------------------------
+///
+/// 
+/// 
+///
+///----------------------------------------------------------------------------
+void ABaseListModel :: setParameters(QVariantMap parameters)
 {
-    if (m_expand == expand)
+	if (mParameters == parameters)
+		return;
+
+	mParameters = parameters;
+	emit parametersChanged(parameters);
+}
+///----------------------------------------------------------------------------
+
+
+
+
+
+
+ ///---------------------------------------------------------------------------
+///
+/// 
+/// 
+///
+///----------------------------------------------------------------------------
+void ABaseListModel::setExpand(QStringList expand)
+{
+    if (mExpand == expand)
         return;
 
-    m_expand = expand;
+    mExpand = expand;
     emit expandChanged(expand);
 }
+///----------------------------------------------------------------------------
 
-void BaseRestListModel::setIdField(QString idField)
+
+
+
+
+
+ ///---------------------------------------------------------------------------
+///
+/// 
+/// 
+///
+///----------------------------------------------------------------------------
+void ABaseListModel::setIdField(QString idField)
 {
-    if (m_idField == idField)
+    if (mIdField == idField)
         return;
 
-    m_idField = idField;
+    mIdField = idField;
     emit idFieldChanged(idField);
 }
+///----------------------------------------------------------------------------
 
-void BaseRestListModel::setApiInstance(APIBase *apiInstance)
+
+
+
+
+
+ ///---------------------------------------------------------------------------
+///
+/// 
+/// 
+///
+///----------------------------------------------------------------------------
+void ABaseListModel :: setApiInstance(APIBase *apiInstance)
 {
-    if (m_apiInstance == apiInstance)
+    if (mApiInstance == apiInstance)
         return;
 
-    m_apiInstance = apiInstance;
+    mApiInstance = apiInstance;
 
-    m_apiInstance->setAccept(accept());
-    connect(m_apiInstance,SIGNAL(replyError(QNetworkReply *, QNetworkReply::NetworkError, QString)),
+    mApiInstance->setAccept(accept());
+    connect(mApiInstance,SIGNAL(replyError(QNetworkReply *, QNetworkReply::NetworkError, QString)),
             this, SLOT(replyError(QNetworkReply *, QNetworkReply::NetworkError, QString)));
 
     emit apiInstanceChanged(apiInstance);
 }
 
-APIBase *BaseRestListModel::apiInstance()
+APIBase *ABaseListModel::apiInstance()
 {
-    if (m_apiInstance == nullptr) {
-        return new APIBase();
+    if (mApiInstance == nullptr) 
+	{
+        return new APIBase(this);
     }
-    return m_apiInstance;
+    return mApiInstance;
 }

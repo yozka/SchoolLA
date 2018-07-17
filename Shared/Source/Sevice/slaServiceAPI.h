@@ -1,9 +1,8 @@
 #pragma once
 #include <QtQml>
-
+#include <QObject>
 
 #include "..\API\ssApibase.h"
-
 ///----------------------------------------------------------------------------
 
 
@@ -27,14 +26,18 @@ public:
 
 	static void declareQML() 
 	{
-		qmlRegisterType<AServiceAPI>("com.sla.api", 1, 0, "AServiceAPI");
+		qmlRegisterType<AServiceAPI>("com.sla.serviceapi", 1, 0, "AServiceAPI");
 	}
 
 	//запрос
-	QNetworkReply *handleRequest(QString path, QStringList sort,
-		QVariantMap filters = QVariantMap(),
-		QStringList fields = QStringList(), QStringList expand = QStringList(),
-		QString id = 0) override;
+	QNetworkReply *handleRequest(const QString &path,
+		const QVariantMap		&parameters = QVariantMap(),
+		const QStringList		&sort = QStringList(),
+		const API::APagination	*pagination = nullptr,
+		const QVariantMap		&filters = QVariantMap(),
+		const QStringList		&fields = QStringList(),
+		const QStringList		&expand = QStringList(),
+		const QString			&id = QString()) override;
 
 
 	//получить список занятий

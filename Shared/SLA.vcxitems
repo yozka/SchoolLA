@@ -17,6 +17,7 @@
     <None Include="$(MSBuildThisFileDirectory)QML\ConversationPage.qml" />
     <None Include="$(MSBuildThisFileDirectory)QML\GradePage.qml" />
     <None Include="$(MSBuildThisFileDirectory)QML\main.qml" />
+    <None Include="$(MSBuildThisFileDirectory)QML\Resource.qrc" />
     <QtRcc Include="$(MSBuildThisFileDirectory)QML\Resource.qrc">
       <FileType>Document</FileType>
     </QtRcc>
@@ -24,6 +25,8 @@
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)Source\API\Models\ssAbstractJsonListModel.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Source\API\Models\ssBaseListModel.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Source\API\Models\ssDetailsModel.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Source\API\Models\ssItem.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Source\API\Models\ssJsonListModel.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Source\API\Models\ssPagination.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Source\API\Models\ssRequests.cpp" />
@@ -41,8 +44,23 @@
     <QtMoc Include="$(MSBuildThisFileDirectory)Source\API\Models\ssRequests.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Source\API\Models\ssAbstractJsonListModel.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)Source\API\Models\ssBaseListModel.h" />
+    <QtMoc Include="$(MSBuildThisFileDirectory)Source\API\Models\ssJsonListModel.h" />
+    <QtMoc Include="$(MSBuildThisFileDirectory)Source\API\Models\ssRequests.h" />
+    <QtMoc Include="$(MSBuildThisFileDirectory)Source\API\Models\ssAbstractJsonListModel.h" />
+    <QtMoc Include="$(MSBuildThisFileDirectory)Source\API\Models\ssBaseListModel.h" />
+    <QtMoc Include="$(MSBuildThisFileDirectory)Source\API\Models\ssPagination.h" />
+    <QtMoc Include="$(MSBuildThisFileDirectory)Source\API\ssApibase.h" />
+    <QtMoc Include="$(MSBuildThisFileDirectory)Source\Sevice\slaServiceAPI.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\Sevice\slaServiceAPI.h" />
+    <QtMoc Include="$(MSBuildThisFileDirectory)Source\API\Models\ssDetailsModel.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\API\Models\ssItem.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\API\Models\ssJsonListModel.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Source\API\Models\ssPagination.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\API\Models\ssRequests.h" />
+    <QtMoc Include="$(MSBuildThisFileDirectory)Source\API\Models\ssAbstractJsonListModel.h" />
+    <QtMoc Include="$(MSBuildThisFileDirectory)Source\API\Models\ssBaseListModel.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\API\ssApibase.h" />
   </ItemGroup>
 </Project>

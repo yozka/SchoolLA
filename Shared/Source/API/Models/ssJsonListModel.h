@@ -1,35 +1,53 @@
 #pragma once
-
-#include "abstractjsonrestlistmodel.h"
 #include <QtQml>
-#include "requests.h"
+#include "ssAbstractJsonListModel.h"
+#include "ssRequests.h"
+///----------------------------------------------------------------------------
 
-class JsonRestListModel : public AbstractJsonRestListModel
+
+namespace API
 {
-    Q_OBJECT
+	///----------------------------------------------------------------------------
 
-public:
-    explicit JsonRestListModel(QObject *parent = 0);
 
-    Q_PROPERTY(Requests *requests READ requests)
 
-    static void declareQML() 
+
+
+
+	 ///---------------------------------------------------------------------------
+	///
+	/// Основная модель списка данных
+	/// 
+	///
+	///----------------------------------------------------------------------------
+	class AJsonListModel 
+		: 
+			public AAbstractJsonListModel
 	{
-        AbstractJsonRestListModel::declareQML();
-        qmlRegisterType<Requests>("com.github.qtrest.requests", 1, 0, "Requests");
-        qmlRegisterType<JsonRestListModel>("com.github.qtrest.jsonrestlistmodel", 1, 0, "JsonRestListModel");
-    }
+		Q_OBJECT
 
-    Requests *requests()
-    {
-        return &m_requests;
-    }
+	public:
+		explicit AJsonListModel(QObject *parent = 0);
 
-protected:
-    QNetworkReply *fetchMoreImpl(const QModelIndex &parent);
-    QNetworkReply *fetchDetailImpl(QString id);
-    QVariantMap preProcessItem(QVariantMap item);
+		Q_PROPERTY(ARequests *requests READ requests)
 
-    Requests m_requests;
-};
+		static void declareQML()
+		{
+			AAbstractJsonListModel::declareQML();
+			qmlRegisterType<ARequests>("com.sla.requests", 1, 0, "ARequests");
+			qmlRegisterType<AJsonListModel>("com.sla.jsonlistmodel", 1, 0, "AJsonListModel");
+		}
 
+		ARequests *requests()
+		{
+			return &mRequests;
+		}
+
+	protected:
+		QNetworkReply *fetchMoreImpl(const QModelIndex &parent) override;
+		QNetworkReply *fetchDetailImpl(const QString &id) override;
+		QVariantMap preProcessItem(const QVariantMap &item) override;
+
+		ARequests mRequests;
+	};
+}

@@ -1,26 +1,42 @@
-#ifndef RESTITEM_H
-#define RESTITEM_H
-
+#pragma once
 #include <QVariantMap>
+///----------------------------------------------------------------------------
 
-class RestItem {
-public:
-    RestItem();
-    explicit RestItem(QVariantMap object, QString idField);
-    QVariant value(QString key);
-    QStringList keys();
-    QString id() const;
-    bool isUpdated();
-    bool isValid() const;
 
-    void update (QVariantMap value);
+namespace API
+{
+	///----------------------------------------------------------------------------
 
-    bool operator==(const RestItem &other);
-private:
-    QVariantMap m_object;
-    QString m_idField;
-    bool m_isUpdated;
-    bool m_isValid;
-};
 
-#endif // RESTITEM_H
+
+
+
+
+	 ///---------------------------------------------------------------------------
+	///
+	/// Один элемент данных
+	/// 
+	///
+	///----------------------------------------------------------------------------
+	class AItem 
+	{
+	public:
+		AItem();
+		explicit AItem(const QVariantMap &object, const QString &idField);
+		QVariant value(const QString &key) const;
+		QStringList keys() const;
+		QString id() const;
+		bool isUpdated() const;
+		bool isValid() const;
+
+		void update(const QVariantMap &value);
+
+		bool operator==(const AItem &other);
+	private:
+		QVariantMap mObject;
+		QString mIdField;
+		bool mIsUpdated;
+		bool mIsValid;
+	};
+
+}
