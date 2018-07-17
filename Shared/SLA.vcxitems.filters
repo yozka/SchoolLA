@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="source">
+      <UniqueIdentifier>{e7d79201-b4a3-408d-ba54-4beb01715fc7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="QML">
+      <UniqueIdentifier>{3acb7010-dd90-49ae-a121-5fd9ecc963fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource">
+      <UniqueIdentifier>{3688e026-44fc-43cb-90db-b0361708e97b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\API">
+      <UniqueIdentifier>{3671ed94-165f-4f27-8f52-afecad5acbc6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\Service">
+      <UniqueIdentifier>{e7781029-7f7a-4558-9cc7-5f36bbf5a647}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\Service\API">
+      <UniqueIdentifier>{300985c8-6c35-40ac-bc0f-037b71da2056}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\API\Models">
+      <UniqueIdentifier>{845298b1-9d68-430a-b932-96bbf9e583cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\API\Models\JsonListModel">
+      <UniqueIdentifier>{8b418afe-ad42-40cf-9414-a0f4268e1e98}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\API\Models\Requests">
+      <UniqueIdentifier>{05739202-ca8c-4e71-9727-7834ec98d105}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\API\Models\AbstractJsonListModel">
+      <UniqueIdentifier>{7749d8d1-e971-4c24-98d1-222d2cf9c35e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\API\Models\BaseListModel">
+      <UniqueIdentifier>{252e19c8-ceb9-48a6-a01d-e55f2234ad12}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\API\Models\Pagination">
+      <UniqueIdentifier>{8d46eb73-64ea-429c-b1dd-6900c85a3072}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)QML\ConversationPage.qml">
+      <Filter>QML</Filter>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)QML\GradePage.qml">
+      <Filter>QML</Filter>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)QML\main.qml">
+      <Filter>QML</Filter>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)QML\Resource.qrc">
+      <Filter>Resource</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Source\API\ssApibase.cpp">
+      <Filter>source\API</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Source\Sevice\slaServiceAPI.cpp">
+      <Filter>source\Service\API</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Source\API\Models\ssJsonListModel.cpp">
+      <Filter>source\API\Models\JsonListModel</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Source\API\Models\ssRequests.cpp">
+      <Filter>source\API\Models\Requests</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Source\API\Models\ssAbstractJsonListModel.cpp">
+      <Filter>source\API\Models\AbstractJsonListModel</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Source\API\Models\ssBaseListModel.cpp">
+      <Filter>source\API\Models\BaseListModel</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Source\API\Models\ssPagination.cpp">
+      <Filter>source\API\Models\Pagination</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\API\ssApibase.h">
+      <Filter>source\API</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\Sevice\slaServiceAPI.h">
+      <Filter>source\Service\API</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\API\Models\ssJsonListModel.h">
+      <Filter>source\API\Models\JsonListModel</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\API\Models\ssRequests.h">
+      <Filter>source\API\Models\Requests</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\API\Models\ssAbstractJsonListModel.h">
+      <Filter>source\API\Models\AbstractJsonListModel</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\API\Models\ssBaseListModel.h">
+      <Filter>source\API\Models\BaseListModel</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\API\Models\ssPagination.h">
+      <Filter>source\API\Models\Pagination</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
