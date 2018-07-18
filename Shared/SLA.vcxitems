@@ -16,8 +16,11 @@
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)QML\ConversationPage.qml" />
     <None Include="$(MSBuildThisFileDirectory)QML\GradePage.qml" />
-    <None Include="$(MSBuildThisFileDirectory)QML\main.qml" />
+    <None Include="$(MSBuildThisFileDirectory)QML\GradesList.qml" />
+    <None Include="$(MSBuildThisFileDirectory)QML\Main.qml" />
     <None Include="$(MSBuildThisFileDirectory)QML\Resource.qrc" />
+    <None Include="$(MSBuildThisFileDirectory)QML\SchoolPage.qml" />
+    <None Include="$(MSBuildThisFileDirectory)Translated\sla_ru.ts" />
     <QtRcc Include="$(MSBuildThisFileDirectory)QML\Resource.qrc">
       <FileType>Document</FileType>
     </QtRcc>
@@ -31,6 +34,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Source\API\Models\ssPagination.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Source\API\Models\ssRequests.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Source\API\ssApibase.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Source\API\ssUtils.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Source\Sevice\slaServiceAPI.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -53,6 +57,8 @@
     <QtMoc Include="$(MSBuildThisFileDirectory)Source\Sevice\slaServiceAPI.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\API\Models\ssBaseListModel.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\API\ssUtils.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Source\Sevice\slaServiceAPI.h" />
     <QtMoc Include="$(MSBuildThisFileDirectory)Source\API\Models\ssDetailsModel.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Source\API\Models\ssItem.h" />

@@ -40,19 +40,40 @@
     <Filter Include="source\API\Models\DetailsModel">
       <UniqueIdentifier>{049f5a8f-ecae-43f4-bdd3-c425a90de55a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="source\API\Utils">
+      <UniqueIdentifier>{084c684e-b95e-455c-8057-28c5594c91a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Translated">
+      <UniqueIdentifier>{e26847a6-df75-491e-b59e-b1a19c483480}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="QML\School">
+      <UniqueIdentifier>{45efcde3-5d4a-44c6-99da-0b01fac1f047}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="QML\Grade">
+      <UniqueIdentifier>{0be03384-eb9a-4ebe-8fa5-0d545d27886c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <None Include="$(MSBuildThisFileDirectory)QML\ConversationPage.qml">
-      <Filter>QML</Filter>
-    </None>
-    <None Include="$(MSBuildThisFileDirectory)QML\GradePage.qml">
-      <Filter>QML</Filter>
-    </None>
-    <None Include="$(MSBuildThisFileDirectory)QML\main.qml">
-      <Filter>QML</Filter>
-    </None>
     <None Include="$(MSBuildThisFileDirectory)QML\Resource.qrc">
       <Filter>Resource</Filter>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)Translated\sla_ru.ts">
+      <Filter>Translated</Filter>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)QML\Main.qml">
+      <Filter>QML</Filter>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)QML\SchoolPage.qml">
+      <Filter>QML\School</Filter>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)QML\GradePage.qml">
+      <Filter>QML\Grade</Filter>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)QML\ConversationPage.qml">
+      <Filter>QML\Grade</Filter>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)QML\GradesList.qml">
+      <Filter>QML\School</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -83,14 +104,11 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Source\Sevice\slaServiceAPI.cpp">
       <Filter>source\Service</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Source\API\ssUtils.cpp">
+      <Filter>source\API\Utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Source\API\Models\ssBaseListModel.h">
-      <Filter>source\API\Models\BaseListModel</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Source\API\Models\ssAbstractJsonListModel.h">
-      <Filter>source\API\Models\AbstractJsonListModel</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Source\API\ssApibase.h">
       <Filter>source\API</Filter>
     </ClInclude>
@@ -106,11 +124,14 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Source\API\Models\ssItem.h">
       <Filter>source\API\Models\Item</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Source\API\Models\ssDetailsModel.h">
-      <Filter>source\API\Models\DetailsModel</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Source\Sevice\slaServiceAPI.h">
       <Filter>source\Service</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\API\ssUtils.h">
+      <Filter>source\API\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\API\Models\ssBaseListModel.h">
+      <Filter>source\API\Models\BaseListModel</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

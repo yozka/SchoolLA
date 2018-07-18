@@ -8,6 +8,7 @@
 #include <QNetworkReply>
 #include <QHttpMultiPart>
 
+#include "ssUtils.h"
 #include "Models\ssPagination.h"
 ///----------------------------------------------------------------------------
 

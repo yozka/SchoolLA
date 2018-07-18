@@ -1,5 +1,6 @@
 #include "slaServiceAPI.h"
 
+
 #include <QFile>
 #include <QTextStream>
 #include <QUrlQuery>
@@ -45,16 +46,52 @@ QNetworkReply *AServiceAPI :: handleRequest(
 		const QStringList		&expand,
 		const QString			&id)
 {
+	/*
 	if (path == "grade")
 	{
 		return getGrade(1);
-	}
+	}*/
 
 
-	return nullptr;
+	return defaultRequest(path, parameters, sort, pagination, filters, fields, expand, id);
 }
 ///----------------------------------------------------------------------------
 
+
+
+
+
+ ///---------------------------------------------------------------------------
+///
+/// формирование запроса по умолчанию
+/// 
+///
+///----------------------------------------------------------------------------
+QNetworkReply *AServiceAPI::defaultRequest(
+				const QString			&path,
+				const QVariantMap		&parameters,
+				const QStringList		&sort,
+				const API::APagination	*pagination,
+				const QVariantMap		&filters,
+				const QStringList		&fields,
+				const QStringList		&expand,
+				const QString			&id)
+{
+	QString adr = API::utils::makeSeparator(baseUrl()) + API::utils::makeSeparator(path);
+	QUrl url = QUrl(adr);
+	QUrlQuery query;
+
+	for (const auto &key : parameters.keys())
+	{
+		query.addQueryItem(key, parameters.value(key).toString());
+	}
+	url.setQuery(query.query());
+
+
+	QNetworkReply *reply = get(url);
+	return reply;
+}
+///----------------------------------------------------------------------------
 
 
 

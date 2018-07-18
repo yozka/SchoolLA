@@ -1,7 +1,11 @@
 <RCC>
     <qresource prefix="/main">
-        <file>main.qml</file>
-        <file>GradePage.qml</file>
         <file>ConversationPage.qml</file>
+        <file>GradePage.qml</file>
+        <file>Main.qml</file>
+    </qresource>
+    <qresource prefix="/school">
+        <file>GradesList.qml</file>
+        <file>SchoolPage.qml</file>
     </qresource>
 </RCC>

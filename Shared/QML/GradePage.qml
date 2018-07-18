@@ -22,14 +22,14 @@ Page
         api: serviceAPI
 
 
-		parameters: {'schoolID': 1, 'test' : 2}
+		parameters: {'schoolID': 1}
 
 
         idField: 'id'
 
         requests 
 		{
-            get: "grade"
+            get: "1.0/grade"
         }
 
         Component.onCompleted: { console.log(pagination.perPage); reload(); }
@@ -41,7 +41,7 @@ Page
 	{
         Label 
 		{
-			text: qsTr("Занятия")
+			text: qsTr("Grade")
             font.pixelSize: 20
             anchors.centerIn: parent
         }

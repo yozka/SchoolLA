@@ -44,4 +44,16 @@ public:
 	QNetworkReply *getGrade(const int schoolID);
 	
 
+
+private:
+
+	//формирование запроса по умолчанию
+	QNetworkReply *defaultRequest(const QString &path,
+		const QVariantMap		&parameters = QVariantMap(),
+		const QStringList		&sort = QStringList(),
+		const API::APagination	*pagination = nullptr,
+		const QVariantMap		&filters = QVariantMap(),
+		const QStringList		&fields = QStringList(),
+		const QStringList		&expand = QStringList(),
+		const QString			&id = QString());
 };

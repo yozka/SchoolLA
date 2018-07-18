@@ -3,6 +3,8 @@ import QtQuick.Controls 2.0
 
 import com.sla.serviceapi 1.0
 
+import "qrc:/school"
+
 ApplicationWindow 
 {
     id: window
@@ -17,7 +19,7 @@ ApplicationWindow
         baseUrl: "https://sla.tigraha.com/api"
 
         authTokenHeader: "Authorization"
-        authToken: "Bearer 8aef452ee3b32466209535b96d456b06"
+        authToken: "testToken"
 
         Component.onCompleted: console.log("completed!");
     }
@@ -27,8 +29,8 @@ ApplicationWindow
 	{
         id: stackView
         anchors.fill: parent
-        initialItem: GradePage{}
+		
 
-
+		initialItem: SchoolPage {}
 	}
 }
