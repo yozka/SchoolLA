@@ -12,10 +12,11 @@ import com.sla.jsonlistmodel 1.0
 
 Page 
 {
-	id: root
+	id: grade
 
+	property int gradeID
 
-
+	/*
 	AJsonListModel 
 	{
 		id: gradeModel
@@ -33,47 +34,39 @@ Page
         }
 
         Component.onCompleted: { console.log(pagination.perPage); reload(); }
-	}
+	}*/
 
 
 
-    header: ToolBar 
+	header: ToolBar 
 	{
+        ToolButton 
+		{
+            text: qsTr("Back")
+            anchors.left: parent.left
+            anchors.leftMargin: 10
+            anchors.verticalCenter: parent.verticalCenter
+            onClicked: grade.StackView.view.pop()
+        }
+
         Label 
 		{
-			text: qsTr("Grade")
+            id: pageTitle
+            text: "Grade id " + gradeID
             font.pixelSize: 20
             anchors.centerIn: parent
         }
     }
 
-    ListView 
-	{
-        id: listView
-        anchors.fill: parent
-        topMargin: 48
-        leftMargin: 48
-        bottomMargin: 48
-        rightMargin: 48
-        spacing: 20
-        model: gradeModel
-        delegate: ItemDelegate 
-		{
-            text: name
-            width: listView.width - listView.leftMargin - listView.rightMargin
-            height: avatar.implicitHeight
-            leftPadding: avatar.implicitWidth + 32
-            onClicked: 
-			{
-				root.StackView.view.push("qrc:/main/ConversationPage.qml", { inConversationWith: name })
-				gradeModel.parameters = {'test3' : 3}
-			}
 
-			/*
-            Image {
-                id: avatar
-                source: "qrc:/" + modelData.replace(" ", "_") + ".png"
-            }*/
+
+	footer: ToolBar 
+	{
+        Label 
+		{
+			text: qsTr("Footer grade")
+            font.pixelSize: 20
+            anchors.centerIn: parent
         }
     }
 }

@@ -59,7 +59,7 @@
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Source\API\Models\ssBaseListModel.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Source\API\ssUtils.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)Source\Sevice\slaServiceAPI.h" />
+    <QtMoc Include="$(MSBuildThisFileDirectory)Source\Sevice\slaServiceAPI.h" />
     <QtMoc Include="$(MSBuildThisFileDirectory)Source\API\Models\ssDetailsModel.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Source\API\Models\ssItem.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Source\API\Models\ssJsonListModel.h" />
@@ -67,6 +67,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Source\API\Models\ssRequests.h" />
     <QtMoc Include="$(MSBuildThisFileDirectory)Source\API\Models\ssAbstractJsonListModel.h" />
     <QtMoc Include="$(MSBuildThisFileDirectory)Source\API\Models\ssBaseListModel.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)Source\API\ssApibase.h" />
+    <QtMoc Include="$(MSBuildThisFileDirectory)Source\API\ssApibase.h" />
   </ItemGroup>
 </Project>

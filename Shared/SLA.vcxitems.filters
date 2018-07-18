@@ -109,9 +109,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Source\API\ssApibase.h">
-      <Filter>source\API</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Source\API\Models\ssJsonListModel.h">
       <Filter>source\API\Models\JsonListModel</Filter>
     </ClInclude>
@@ -123,9 +120,6 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Source\API\Models\ssItem.h">
       <Filter>source\API\Models\Item</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Source\Sevice\slaServiceAPI.h">
-      <Filter>source\Service</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Source\API\ssUtils.h">
       <Filter>source\API\Utils</Filter>

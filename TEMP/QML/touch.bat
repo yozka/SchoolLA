@@ -1,0 +1,1 @@
+copy Resource.qrc /B+ ,,/Y

@@ -16,7 +16,7 @@ import "qrc:/grade"
 
 Page 
 {
-	id: school
+	id: root
 
 	
 	//индификатор школы
@@ -46,14 +46,13 @@ Page
 			Layout.fillWidth: true
             Layout.fillHeight: true
 
-			schoolID : school.schoolID
+			schoolID : root.schoolID
 
 			onSelect : function(gradeID)
 			{
 				//выбрали урок
 				//покажем его
-				console.log("SHow grade page " + gradeID);
-				school.StackView.view.push("qrc:/grade/GradePage.qml", {gradeID:gradeID});
+				
 			}
 		}
 
