@@ -22,51 +22,55 @@ Page
 	//индификатор школы
 	property int schoolID : 1
 
-	
 
-
-	header: ToolBar 
-	{
-        Label 
-		{
-			text: qsTr("School")
-            font.pixelSize: 20
-            anchors.centerIn: parent
-        }
-    }
-
-	ColumnLayout 
-	{
+    SwipeView
+    {
+        id: swipeView
         anchors.fill: parent
- 
+        currentIndex: tabBar.currentIndex
 
-      	GradesList
-		{
-			id: gradesList
-			Layout.fillWidth: true
-            Layout.fillHeight: true
+        GradesForm
+        {
+            schoolID : school.schoolID
 
-			schoolID : school.schoolID
+            onSelect : function(gradeID)
+            {
+                //выбрали урок
+                //покажем его
+                console.log("SHow grade page " + gradeID);
+                school.StackView.view.push("qrc:/grade/GradePage.qml", {gradeID:gradeID});
+            }
+        }
 
-			onSelect : function(gradeID)
-			{
-				//выбрали урок
-				//покажем его
-				console.log("SHow grade page " + gradeID);
-				school.StackView.view.push("qrc:/grade/GradePage.qml", {gradeID:gradeID});
-			}
-		}
+        TeachersForm
+        {
+        }
 
-    }
+        StudentsForm
+        {
 
-	footer: ToolBar 
-	{
-        Label 
-		{
-			text: qsTr("Footer School")
-            font.pixelSize: 20
-            anchors.centerIn: parent
         }
     }
+
+    footer: TabBar
+    {
+        id: tabBar
+        currentIndex: swipeView.currentIndex
+
+        TabButton
+        {
+            text: qsTr("Grades")
+        }
+        TabButton
+        {
+            text: qsTr("Teachers")
+        }
+        TabButton
+        {
+            text: qsTr("Students")
+        }
+    }
+
+
 }
 

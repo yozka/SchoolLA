@@ -3,8 +3,10 @@
         <file>Main.qml</file>
     </qresource>
     <qresource prefix="/school">
-        <file>GradesList.qml</file>
         <file>SchoolPage.qml</file>
+        <file>GradesForm.qml</file>
+        <file>TeachersForm.qml</file>
+        <file>StudentsForm.qml</file>
     </qresource>
     <qresource prefix="/grade">
         <file>GradePage.qml</file>

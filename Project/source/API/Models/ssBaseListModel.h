@@ -22,7 +22,7 @@ namespace API
 
 	 ///---------------------------------------------------------------------------
 	///
-	/// Основная модель списка данных
+	/// СњСЃРЅРѕРІРЅР°В¤ РјРѕРґРµР»СЊ СЃРїРёСЃРєР° РґР°РЅРЅС‹С…
 	/// 
 	///
 	///----------------------------------------------------------------------------
@@ -54,7 +54,7 @@ namespace API
 			//Specify Accept header for application/json or application/xml
 			Q_PROPERTY(QByteArray accept READ accept WRITE setAccept NOTIFY acceptChanged)
 
-			//Параметры идут как пара ключь - значение
+			//С•Р°СЂР°РјРµС‚СЂС‹ РёРґСѓС‚ РєР°Рє РїР°СЂР° РєР»СЋС‡СЊ - Р·РЅР°С‡РµРЅРёРµ
 			Q_PROPERTY(QVariantMap parameters READ parameters WRITE setParameters NOTIFY parametersChanged)
 
 

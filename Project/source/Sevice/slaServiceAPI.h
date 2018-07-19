@@ -12,7 +12,7 @@
 
  ///---------------------------------------------------------------------------
 ///
-/// Основоное API для доступа к сервису
+/// РћСЃРЅРѕРІРѕРЅРѕРµ API РґР»СЏ РґРѕСЃС‚СѓРїР° Рє СЃРµСЂРІРёСЃСѓ
 /// 
 ///
 ///----------------------------------------------------------------------------
@@ -29,7 +29,7 @@ public:
 		qmlRegisterType<AServiceAPI>("com.sla.serviceapi", 1, 0, "AServiceAPI");
 	}
 
-	//запрос
+	//Р·Р°РїСЂРѕСЃ
 	QNetworkReply *handleRequest(const QString &path,
 		const QVariantMap		&parameters = QVariantMap(),
 		const QStringList		&sort = QStringList(),
@@ -40,14 +40,14 @@ public:
 		const QString			&id = QString()) override;
 
 
-	//получить список занятий
+	//РїРѕР»СѓС‡РёС‚СЊ СЃРїРёСЃРѕРє Р·Р°РЅСЏС‚РёР№
 	QNetworkReply *getGrade(const int schoolID);
 	
 
 
 private:
 
-	//формирование запроса по умолчанию
+	//С„РѕСЂРјРёСЂРѕРІР°РЅРёРµ Р·Р°РїСЂРѕСЃР° РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ
 	QNetworkReply *defaultRequest(const QString &path,
 		const QVariantMap		&parameters = QVariantMap(),
 		const QStringList		&sort = QStringList(),

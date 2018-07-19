@@ -36,13 +36,24 @@ SOURCES += main.cpp \
     source/Sevice/slaServiceAPI.cpp \
     main.cpp
 
-RESOURCES += qml/qml.qrc
+RESOURCES +=    qml/qml.qrc \
+                assets/assets.qrc
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =
 
 # Additional import path used to resolve QML modules just for Qt Quick Designer
 QML_DESIGNER_IMPORT_PATH =
+
+
+
+#Translations
+lupdate_only
+{
+    SOURCES += /qml/*.qml
+}
+TRANSLATIONS += assets/translations/sla_ru.ts
+
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -70,5 +81,8 @@ HEADERS += \
     source/API/ssApibase.h \
     source/API/ssUtils.h \
     source/Sevice/slaServiceAPI.h
+
+DISTFILES += \
+    assets/translations/sla_ru.ts
 
 

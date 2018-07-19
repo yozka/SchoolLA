@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>translations/sla_ru.qm</file>
+        <file>qtlabscontrols.conf</file>
+    </qresource>
+</RCC>
