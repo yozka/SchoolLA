@@ -47,12 +47,14 @@ QML_DESIGNER_IMPORT_PATH =
 
 
 
-#Translations
 lupdate_only
 {
-    SOURCES += /qml/*.qml
+    SOURCES += qml/*.qml
 }
+
+#Translations
 TRANSLATIONS += assets/translations/sla_ru.ts
+
 
 
 # Default rules for deployment.
@@ -84,5 +86,6 @@ HEADERS += \
 
 DISTFILES += \
     assets/translations/sla_ru.ts
+
 
 
