@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
 
     //QQuickStyle::setStyle("Material");
     QTranslator translator;
-    translator.load("qrc:/translations/sla_ru.qm");
+    translator.load("sla_ru", ":/translations");
     app.installTranslator(&translator);
 
     AServiceAPI::declareQML();

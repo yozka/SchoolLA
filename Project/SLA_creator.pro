@@ -23,18 +23,8 @@ SOURCES += main.cpp \
     source/API/Models/ssRequests.cpp \
     source/API/ssApibase.cpp \
     source/API/ssUtils.cpp \
-    source/Sevice/slaServiceAPI.cpp \
-    source/API/Models/ssAbstractJsonListModel.cpp \
-    source/API/Models/ssBaseListModel.cpp \
-    source/API/Models/ssDetailsModel.cpp \
-    source/API/Models/ssItem.cpp \
-    source/API/Models/ssJsonListModel.cpp \
-    source/API/Models/ssPagination.cpp \
-    source/API/Models/ssRequests.cpp \
-    source/API/ssApibase.cpp \
-    source/API/ssUtils.cpp \
-    source/Sevice/slaServiceAPI.cpp \
-    main.cpp
+    source/Sevice/slaServiceAPI.cpp
+
 
 RESOURCES +=    qml/qml.qrc \
                 assets/assets.qrc
@@ -47,10 +37,11 @@ QML_DESIGNER_IMPORT_PATH =
 
 
 
-lupdate_only
-{
-    SOURCES += qml/*.qml
-}
+#lupdate_only
+#{
+#    SOURCES += qml/*.qml
+#}
+
 
 #Translations
 TRANSLATIONS += assets/translations/sla_ru.ts
@@ -63,16 +54,6 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
-    source/API/Models/ssAbstractJsonListModel.h \
-    source/API/Models/ssBaseListModel.h \
-    source/API/Models/ssDetailsModel.h \
-    source/API/Models/ssItem.h \
-    source/API/Models/ssJsonListModel.h \
-    source/API/Models/ssPagination.h \
-    source/API/Models/ssRequests.h \
-    source/API/ssApibase.h \
-    source/API/ssUtils.h \
-    source/Sevice/slaServiceAPI.h \
     source/API/Models/ssAbstractJsonListModel.h \
     source/API/Models/ssBaseListModel.h \
     source/API/Models/ssDetailsModel.h \
