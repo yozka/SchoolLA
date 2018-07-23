@@ -16,6 +16,13 @@ Page
 
 	property int gradeID
 
+
+    function show(id)
+    {
+        gradeID = id;
+        stackView.push(this);
+    }
+
 	/*
 	AJsonListModel 
 	{

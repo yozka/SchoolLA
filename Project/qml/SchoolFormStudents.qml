@@ -1,42 +1,32 @@
 import QtQuick 2.9
 import QtQuick.Controls 2.2
 
-
 import com.sla.jsonlistmodel 1.0
 
 
 Page
 {
-    //индификатор школы
-    property int schoolID
-    property var onSelect
-
+    title:qsTr("Students")
 
     AJsonListModel
     {
-        id: gradesModel
+        id: studentsModel
         api: serviceAPI
 
 
-        parameters: {'schoolID': schoolID}
+        parameters: {'schoolID': school.schoolID}
         onParametersChanged: reload()
 
         idField: 'id'
 
         requests
         {
-            get: "1.0/grade"
+            get: "1.0/school/student"
         }
 
         Component.onCompleted: { console.log(pagination.perPage);}
     }
 
-    header: Label
-    {
-        text: qsTr("Grades")
-        font.pixelSize: Qt.application.font.pixelSize * 2
-        padding: 10
-    }
 
     ListView
     {
@@ -47,7 +37,7 @@ Page
         bottomMargin: 48
         rightMargin: 48
         spacing: 10
-        model: gradesModel
+        model: studentsModel
         delegate: ItemDelegate
         {
             text: name

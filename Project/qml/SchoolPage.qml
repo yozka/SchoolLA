@@ -12,7 +12,6 @@ import QtQuick.Layouts 1.3
 
 import com.sla.jsonlistmodel 1.0
 
-import "qrc:/grade"
 
 Page 
 {
@@ -21,6 +20,15 @@ Page
 	
 	//индификатор школы
 	property int schoolID : 1
+    property string schoolName: "Фаблаб" //имя школы
+
+
+    header:SchoolHeader
+    {
+        id:schoolHeader
+        schoolName:school.schoolName
+        title:swipeView.currentItem.title
+    }
 
 
     SwipeView
@@ -29,28 +37,20 @@ Page
         anchors.fill: parent
         currentIndex: tabBar.currentIndex
 
-        GradesForm
-        {
-            schoolID : school.schoolID
-
-            onSelect : function(gradeID)
-            {
-                //выбрали урок
-                //покажем его
-                console.log("SHow grade page " + gradeID);
-                school.StackView.view.push("qrc:/grade/GradePage.qml", {gradeID:gradeID});
-            }
-        }
-
-        TeachersForm
+        SchoolFormGrades
         {
         }
 
-        StudentsForm
+        SchoolFormTeachers
+        {
+        }
+
+        SchoolFormStudents
         {
 
         }
     }
+
 
     footer: TabBar
     {

@@ -16,7 +16,35 @@
     <name>GradesForm</name>
     <message>
         <source>Grades</source>
-        <translation>Занятия</translation>
+        <translation type="vanished">Занятия</translation>
+    </message>
+</context>
+<context>
+    <name>SchoolFormGrades</name>
+    <message>
+        <source>Grades</source>
+        <translation type="unfinished">Занятия</translation>
+    </message>
+</context>
+<context>
+    <name>SchoolFormStudents</name>
+    <message>
+        <source>Students</source>
+        <translation type="unfinished">Ученики</translation>
+    </message>
+</context>
+<context>
+    <name>SchoolFormTeachers</name>
+    <message>
+        <source>Teachers</source>
+        <translation type="unfinished">Учителя</translation>
+    </message>
+</context>
+<context>
+    <name>SchoolHeader</name>
+    <message>
+        <source>⋮</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -38,22 +66,14 @@
     <name>StudentsForm</name>
     <message>
         <source>Students</source>
-        <translation>Ученики</translation>
-    </message>
-    <message>
-        <source>You are on Page 1.</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Ученики</translation>
     </message>
 </context>
 <context>
     <name>TeachersForm</name>
     <message>
         <source>Teachers</source>
-        <translation>Учителя</translation>
-    </message>
-    <message>
-        <source>You are on Page 2.</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Учителя</translation>
     </message>
 </context>
 </TS>

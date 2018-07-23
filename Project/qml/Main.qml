@@ -4,6 +4,7 @@ import QtQuick.Controls 2.2
 import com.sla.serviceapi 1.0
 
 import "qrc:/school"
+import "qrc:/grade"
 
 ApplicationWindow 
 {
@@ -25,12 +26,22 @@ ApplicationWindow
     }
 
 
+    SchoolPage
+    {
+        id: school
+    }
+
+    GradePage
+    {
+        id: grade
+    }
+
     StackView 
 	{
         id: stackView
         anchors.fill: parent
 		
 
-		initialItem: SchoolPage {}
+        initialItem: school
 	}
 }
