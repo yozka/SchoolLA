@@ -6,15 +6,18 @@
 **
 ****************************************************************************/
 
-import QtQuick 2.9
-import QtQuick.Controls 2.2
+import QtQuick 2.6
+import QtQuick.Controls 2.1
+import QtQuick.Layouts 1.3
+
 import com.sla.jsonlistmodel 1.0
 
-Page 
-{
-	id: grade
 
-	property int gradeID
+Page
+{
+    id: grade
+
+    property int gradeID //индификатор занятий
 
 
     function show(id)
@@ -23,58 +26,48 @@ Page
         stackView.push(this);
     }
 
-	/*
-	AJsonListModel 
-	{
-		id: gradeModel
-        api: serviceAPI
 
 
-		parameters: {'schoolID': 1}
+    header:GradeHeader
+    {
+        id:gradeHeader
+    }
 
 
-        idField: 'id'
+    SwipeView
+    {
+        id: swipeView
+        anchors.fill: parent
+        currentIndex: tabBar.currentIndex
 
-        requests 
-		{
-            get: "1.0/grade"
+        GradeFormStudents
+        {
+
         }
 
-        Component.onCompleted: { console.log(pagination.perPage); reload(); }
-	}*/
-
-
-
-	header: ToolBar 
-	{
-        ToolButton 
-		{
-            text: qsTr("Back")
-            anchors.left: parent.left
-            anchors.leftMargin: 10
-            anchors.verticalCenter: parent.verticalCenter
-            onClicked: grade.StackView.view.pop()
+        GradeFormTeachers
+        {
         }
 
-        Label 
-		{
-            id: pageTitle
-            text: "Grade id " + gradeID
-            font.pixelSize: 20
-            anchors.centerIn: parent
+
+    }
+
+
+    footer: TabBar
+    {
+        id: tabBar
+        currentIndex: swipeView.currentIndex
+
+        TabButton
+        {
+            text: qsTr("Students")
+        }
+        TabButton
+        {
+            text: qsTr("Teachers")
         }
     }
 
 
-
-	footer: ToolBar 
-	{
-        Label 
-		{
-			text: qsTr("Footer grade")
-            font.pixelSize: 20
-            anchors.centerIn: parent
-        }
-    }
 }
 

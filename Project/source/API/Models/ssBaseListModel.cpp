@@ -182,6 +182,10 @@ void ABaseListModel :: fetchMore(const QModelIndex &parent)
         break;
     }
 
+    beginResetModel();
+    reset();
+    endResetModel();
+
     QNetworkReply *reply = fetchMoreImpl(parent);
     connect(reply, SIGNAL(finished()), this, SLOT(fetchMoreFinished()));
 }
