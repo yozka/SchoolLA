@@ -1,0 +1,178 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}</UniqueIdentifier>
+      <Extensions>qrc;*</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
+    <Filter Include="Form Files">
+      <UniqueIdentifier>{99349809-55BA-4b9d-BF79-8FDBB0286EB3}</UniqueIdentifier>
+      <Extensions>ui</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}</UniqueIdentifier>
+      <Extensions>qrc;*</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
+    <Filter Include="Generated Files">
+      <UniqueIdentifier>{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}</UniqueIdentifier>
+      <Extensions>moc;h;cpp</Extensions>
+      <SourceControlFiles>False</SourceControlFiles>
+    </Filter>
+    <Filter Include="Source">
+      <UniqueIdentifier>{f7f5e865-3371-4bda-b4fe-b6216b811e2a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\API">
+      <UniqueIdentifier>{7863243b-2813-4c6a-bce1-767b7aaa6346}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Service">
+      <UniqueIdentifier>{675f99e9-d038-4089-bac3-adae3c8881e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\API\Utils">
+      <UniqueIdentifier>{8c75936e-4379-4acb-876b-216b69640ebb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\API\Models">
+      <UniqueIdentifier>{dc23d839-d58f-473b-9a4c-7d9771fd34d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\API\Models\AbstractJsonListModel">
+      <UniqueIdentifier>{8a578514-06cb-48cc-a023-9d89d28027dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\API\Models\BaseListModel">
+      <UniqueIdentifier>{da47831e-703c-449c-a574-755e9cd87cf5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\API\Models\DetailsModel">
+      <UniqueIdentifier>{26cdfe06-e13b-46a6-bfc0-bf21cd4963cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\API\Models\Item">
+      <UniqueIdentifier>{75ffde2e-3f20-41c5-997a-d258282bc6c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\API\Models\JsonListModel">
+      <UniqueIdentifier>{b3acfe61-d36f-425e-9443-978c294e888b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\API\Models\Pagination">
+      <UniqueIdentifier>{90d83777-0338-492d-9a02-a8794569d8df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\API\Models\Requests">
+      <UniqueIdentifier>{13616aa8-e0f8-4bc6-bb60-bcb9790f2d11}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="QML">
+      <UniqueIdentifier>{01bbc011-59f7-42d0-80c5-2a7d4459f5e4}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Project\source\Sevice\slaServiceAPI.cpp">
+      <Filter>Source\Service</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Project\source\API\ssApibase.cpp">
+      <Filter>Source\API</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Project\source\API\ssUtils.cpp">
+      <Filter>Source\API\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Project\source\API\Models\ssAbstractJsonListModel.cpp">
+      <Filter>Source\API\Models\AbstractJsonListModel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Project\source\API\Models\ssBaseListModel.cpp">
+      <Filter>Source\API\Models\BaseListModel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Project\source\API\Models\ssDetailsModel.cpp">
+      <Filter>Source\API\Models\DetailsModel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Project\source\API\Models\ssItem.cpp">
+      <Filter>Source\API\Models\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Project\source\API\Models\ssJsonListModel.cpp">
+      <Filter>Source\API\Models\JsonListModel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Project\source\API\Models\ssPagination.cpp">
+      <Filter>Source\API\Models\Pagination</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Project\source\API\Models\ssRequests.cpp">
+      <Filter>Source\API\Models\Requests</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="..\..\Project\source\Sevice\slaServiceAPI.h">
+      <Filter>Source\Service</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\Project\source\API\ssApibase.h">
+      <Filter>Source\API</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\Project\source\API\Models\ssAbstractJsonListModel.h">
+      <Filter>Source\API\Models\AbstractJsonListModel</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\Project\source\API\Models\ssBaseListModel.h">
+      <Filter>Source\API\Models\BaseListModel</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\Project\source\API\Models\ssDetailsModel.h">
+      <Filter>Source\API\Models\DetailsModel</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\Project\source\API\Models\ssJsonListModel.h">
+      <Filter>Source\API\Models\JsonListModel</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\Project\source\API\Models\ssPagination.h">
+      <Filter>Source\API\Models\Pagination</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\Project\source\API\Models\ssRequests.h">
+      <Filter>Source\API\Models\Requests</Filter>
+    </QtMoc>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Project\source\API\ssUtils.h">
+      <Filter>Source\API\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Project\source\API\Models\ssItem.h">
+      <Filter>Source\API\Models\Item</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\Project\qml\GradeFormStudents.qml">
+      <Filter>QML</Filter>
+    </None>
+    <None Include="..\..\Project\qml\GradeFormTeachers.qml">
+      <Filter>QML</Filter>
+    </None>
+    <None Include="..\..\Project\qml\GradeHeader.qml">
+      <Filter>QML</Filter>
+    </None>
+    <None Include="..\..\Project\qml\GradePage.qml">
+      <Filter>QML</Filter>
+    </None>
+    <None Include="..\..\Project\qml\Main.qml">
+      <Filter>QML</Filter>
+    </None>
+    <None Include="..\..\Project\qml\SchoolFormGrades.qml">
+      <Filter>QML</Filter>
+    </None>
+    <None Include="..\..\Project\qml\SchoolFormStudents.qml">
+      <Filter>QML</Filter>
+    </None>
+    <None Include="..\..\Project\qml\SchoolFormTeachers.qml">
+      <Filter>QML</Filter>
+    </None>
+    <None Include="..\..\Project\qml\SchoolHeader.qml">
+      <Filter>QML</Filter>
+    </None>
+    <None Include="..\..\Project\qml\SchoolPage.qml">
+      <Filter>QML</Filter>
+    </None>
+    <None Include="..\..\Project\qml\qtquickcontrols2.conf">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\..\Project\assets\translations\sla_ru.qm">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <QtRcc Include="..\..\Project\qml\qml.qrc">
+      <Filter>Resource Files</Filter>
+    </QtRcc>
+    <QtRcc Include="..\..\Project\assets\assets.qrc">
+      <Filter>Resource Files</Filter>
+    </QtRcc>
+  </ItemGroup>
+</Project>

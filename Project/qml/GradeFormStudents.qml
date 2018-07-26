@@ -35,9 +35,9 @@ Page
         id: listView
         anchors.fill: parent
         topMargin: 48
-        leftMargin: 48
+        leftMargin: 0
         bottomMargin: 48
-        rightMargin: 48
+        rightMargin: 0
         spacing: 10
         model: studentsModel
         delegate: ItemDelegate
@@ -45,24 +45,26 @@ Page
             text: name
             font.pixelSize: 16
             width: listView.width - listView.leftMargin - listView.rightMargin
-            height: 40
+            height: 100
             onClicked:
             {
-                onSelect(gradeID);
+                //onSelect(gradeID);
             }
 
-            ListView {
-                        anchors.fill: parent
+            //список ачивок
+            ListView
+            {
+                anchors.fill: parent
+                spacing: 10
+                model: achivments
 
-                        spacing: 20
-                        model: 4
-
-                        orientation: ListView.Horizontal
-                        delegate:ItemDelegate
-                        {
-                            width:20
-                            height:20
-                        }
+                orientation: ListView.Horizontal
+                delegate:ItemDelegate
+                {
+                    text: modelData.img
+                    height:parent.height
+                    width:parent.height
+               }
 
 
             }
