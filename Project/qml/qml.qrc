@@ -1,0 +1,21 @@
+<RCC>
+    <qresource prefix="/main">
+        <file>Main.qml</file>
+    </qresource>
+    <qresource prefix="/school">
+        <file>SchoolPage.qml</file>
+        <file>SchoolFormGrades.qml</file>
+        <file>SchoolFormTeachers.qml</file>
+        <file>SchoolFormStudents.qml</file>
+        <file>SchoolHeader.qml</file>
+    </qresource>
+    <qresource prefix="/grade">
+        <file>GradePage.qml</file>
+        <file>GradeFormStudents.qml</file>
+        <file>GradeFormTeachers.qml</file>
+        <file>GradeHeader.qml</file>
+    </qresource>
+    <qresource prefix="/">
+        <file>qtquickcontrols2.conf</file>
+    </qresource>
+</RCC>
